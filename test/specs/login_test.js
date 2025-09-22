@@ -24,6 +24,7 @@ describe('TC to verify all the valiadtion of login page', () => {
     it('login with valid credentials', async () => {
         await browser.pause(5000); // Wait for 5 seconds before entering credentials
         await innagoLoginPage.loginIntoDashboard(poUser.userName, poUser.password);
+        await browser.pause(10000); // Wait for 10 seconds after login
  
     });
     
