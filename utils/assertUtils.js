@@ -1,5 +1,9 @@
 class asserUtils { 
 
+    /**
+     *  mentioned below are the Element State Assertions
+     */
+
     async verifyElementExistsonPage(element) {
         const webElement = await $(element);
         await expect(webElement).toBeExisting();
@@ -23,6 +27,52 @@ class asserUtils {
         await expect(webElement).not.toBeDisplayed();
         console.log(`Verified that element ${element} is not displayed on the page.`);
     }
+
+    async verifyElementToBeEnabled(element) { 
+        const webElement = await $(element);
+        await expect(webElement).tobeEnabled();
+        console.log(`Verified that element ${element} is enabled on the page.`);
+    }
+
+    async verifyElementToBeDisabled(element) {
+        const webElement = await $(element);
+        await expect(webElement).not.toBeEnabled();
+        console.log(`Verified that element ${element} is disabled on the page.`);
+    }
+
+    async verifyElementToBeClickable(element) {
+        const webElement = await $(element);
+        await expect(webElement).toBeClickable();
+        console.log(`Verified that element ${element} is clickable on the page.`);
+    }
+    async verifyElementIsNotClickable(element) {
+        const webElement = await $(element);
+        await expect(webElement).not.toBeClickable();
+        console.log(`Verified that element ${element} is not clickable on the page.`);
+    }
+
+    async 
+
+
+
+
+
+
+
+
+
+    async verifyElementToHaveText(element, expectedText) {
+        const webElement = await $(element);
+        await expect(webElement).toHaveText(expectedText);
+        console.log(`Verified that element ${element} has text: ${expectedText}.`);
+    }
+
+
+
+
+    
+
+
 
 
 
