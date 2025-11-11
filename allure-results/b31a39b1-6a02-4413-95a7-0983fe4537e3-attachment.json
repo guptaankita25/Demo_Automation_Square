@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"li[id=\"nav-dash\"]>a[href=\"/Landlord/dashboard\"]\"}\n  (Session info: chrome=142.0.7444.60)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff6055f7995\n\t0x7ff6055f79f0\n\t0x7ff6053716ad\n\t0x7ff6053ca13e\n\t0x7ff6053ca44c\n\t0x7ff60541ebe7\n\t0x7ff60541b8fb\n\t0x7ff6053bb068\n\t0x7ff6053bbe93\n\t0x7ff6058b28e0\n\t0x7ff6058acd60\n\t0x7ff6058ccb55\n\t0x7ff60561302e\n\t0x7ff60561ad1f\n\t0x7ff605600b74\n\t0x7ff605600d2f\n\t0x7ff6055e6788\n\t0x7ffc4886e8d7\n\t0x7ffc4900c53c\n"
+}

@@ -1,4 +1,3 @@
-
 import userActions from "../../utils/userActions";
 //import { expect, browser } from "@wdio/globals";
 //const { expect, browser } = require("@wdio/globals");
@@ -6,10 +5,12 @@ import userActions from "../../utils/userActions";
 
 class innagoLoginPage {
     locators = {
-        userName: 'input[data-locator="loginUsername"]',
-        password: 'input[data-locator="loginPassword"]',
-        signIn_Button: '//button[contains(text(),"Sign In")]',
-        
+        userName: '//input[@id = "username"]',
+        password: '#password',
+        signIn_Button: '',
+        continue_Button: '//button[@data-action-button-primary="true"]',
+        remind_Me_Later_Button: '',
+
     };
 
     
@@ -17,14 +18,30 @@ class innagoLoginPage {
 
 
 
-    
-    async loginIntoDashboard(username, password) {
-        //await userActions.waitForElementToDisplay(this.locator.userName);
+
+
+    /** creating function */
+
+    async loginIn(username, password) {
         await userActions.enterText(this.locators.userName, username);
+        await userActions.clickOn(this.locators.continue_Button);
         await userActions.enterText(this.locators.password, password);
-        await userActions.clickOn(this.locators.signIn_Button);
+        await userActions.clickOn(this.locators.continue_Button);
+        await userActions.waitFor(5000); // Wait for 5 seconds after login
     }
+
+    
 }
+
+
+
+
+
+
+
+
+
+
 
 export default new innagoLoginPage();
 

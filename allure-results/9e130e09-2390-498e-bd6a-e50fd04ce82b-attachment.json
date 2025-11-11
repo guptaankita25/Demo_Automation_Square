@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"li[id=\"nav-dash\"]\"}\n  (Session info: chrome=141.0.7390.125)",
+  "stacktrace": "\tGetHandleVerifier [0x0x7ff77c24e955+80021]\n\tGetHandleVerifier [0x0x7ff77c24e9b0+80112]\n\t(No symbol) [0x0x7ff77bfd060f]\n\t(No symbol) [0x0x7ff77c028854]\n\t(No symbol) [0x0x7ff77c028b1c]\n\t(No symbol) [0x0x7ff77c07c927]\n\t(No symbol) [0x0x7ff77c05126f]\n\t(No symbol) [0x0x7ff77c07968a]\n\t(No symbol) [0x0x7ff77c051003]\n\t(No symbol) [0x0x7ff77c0195d1]\n\t(No symbol) [0x0x7ff77c01a3f3]\n\tGetHandleVerifier [0x0x7ff77c50dced+2960429]\n\tGetHandleVerifier [0x0x7ff77c507faa+2936554]\n\tGetHandleVerifier [0x0x7ff77c5289e7+3070247]\n\tGetHandleVerifier [0x0x7ff77c26843e+185214]\n\tGetHandleVerifier [0x0x7ff77c26fe8f+216527]\n\tGetHandleVerifier [0x0x7ff77c257b94+117460]\n\tGetHandleVerifier [0x0x7ff77c257d4f+117903]\n\tGetHandleVerifier [0x0x7ff77c23dc28+11112]\n\t(No symbol) [0x0x7ffc4886e8d7]\n\tRtlUserThreadStart [0x0x7ffc4900c53c+44]\n"
+}
