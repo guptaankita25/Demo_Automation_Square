@@ -29,12 +29,35 @@ class menu_page {
         //await userActions.doubleClickOnElement("//in-button-group//div//button[@class ='button-primary active ng-star-inserted']")   [tried this function and this function works fine]
         //await userActions.waitUntilElementIsDisplayed('//h3[text()="Collection Stats"]');
         await userActions.waitFor(this.locators.waitFor2Seconds);
+    }
 
-        
 
     
+    async navigateToProperties() {
+        await userActions.waitFor(this.locators.waitFor5Seconds);
+        await userActions.clickOn(this.locators.property);
+        //await userActions.navigateToUrlAndTitle();
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

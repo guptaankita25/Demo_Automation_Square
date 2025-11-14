@@ -6,7 +6,10 @@ class userActions {
         const webElement = await $(element);
         await webElement.click();
     }
-
+/** 
+    //enter text - Because enterText() expects text (a string), not a number.
+    //ZIP codes are often stored as numbers, so .toString() converts them 01235---12345 so that why we use to stringmethod
+*/
     async enterText(element, value, extraTime) {
         const webElement = await $(element);
         //await webElement.waitForDisplayed({ timeout: extraTime || 5000 });
@@ -23,7 +26,6 @@ class userActions {
         console.log("Launching innago Url");
         await this.navigateToUrlAndTitle();
     }
-    
 
     async navigateToUrlAndTitle() {
         const title = await browser.getTitle();
@@ -37,16 +39,14 @@ class userActions {
         return url;
     }
 
-
-    /** Refresh page - Refresh the current page 
-     * @returns {Promise<void>} a Promise that resolves when the page is refreshed 
+    /** Refresh page - Refresh the current page
+     * @returns {Promise<void>} a Promise that resolves when the page is refreshed
      */
     async refreshPage() {
         await browser.refresh();
         await browser.pause(2000); // Wait for 2 seconds after refreshing the page
         console.log("Page is refreshed");
     }
-
 
     /**broswer URL - Get the current URL of the browser
      * @returns {Promise<string>} a Promise that resolves to the current URL
@@ -56,7 +56,6 @@ class userActions {
         console.log(`Current browser URL is: ${currentUrl}`);
         return currentUrl;
     }
-
 
     /**opens new window - Opens a new browser window with the specified URL
      * @param {string} url - The URL to open in the new window
@@ -93,7 +92,6 @@ class userActions {
         console.log("Navigating forward to the next page");
         await browser.forward();
         await browser.pause(2000); // Wait for 2 seconds after navigating forward
-
     }
 
     /**maximize window - Maximizes the browser window
@@ -105,7 +103,7 @@ class userActions {
         await browser.pause(2000); // Wait for 2 seconds after maximizing the window
     }
 
-    /** 
+    /**
      * minimize window - Minimizes the browser window
      */
     async minimizeWindow() {
@@ -132,17 +130,13 @@ class userActions {
         await browser.pause(2000); // Wait for 2 seconds after deleting cookies
     }
 
-
-
-
-
     /**
      * Element Interaction Commands
      */
- 
+
     /**
      * clickOnElement - Clicks on the specified element.
-     * 
+     *
      */
     async clickOnElement(locator) {
         const element = await $(locator);
@@ -150,7 +144,7 @@ class userActions {
         console.log(`Clicked on element: ${locator}`);
     }
 
-   /** 
+    /**
      * doubleClickOnElement - Double clicks on the specified element.
      */
     async doubleClickOnElement(locator) {
@@ -159,7 +153,7 @@ class userActions {
         console.log(`Double clicked on element: ${locator}`);
     }
 
-    /** 
+    /**
      * Move to element (hover) - Moves the mouse to the center of an element (useful for hover menus). [moves the mouse pointer to the center of a given element.]
      */
 
@@ -169,12 +163,12 @@ class userActions {
         console.log(`Moved to element: ${locator}`);
     }
 
-    /** 
+    /**
      * rightClickOnElement - Right clicks on the specified element [Simulates a right-click]
      */
     async rightClickOnElement(locator) {
         const element = await $(locator);
-        await element.click({ button: 'right' });
+        await element.click({ button: "right" });
         console.log(`Right clicked on element: ${locator}`);
     }
 
@@ -184,10 +178,10 @@ class userActions {
     async setValue(locator, value) {
         const element = await $(locator);
         await element.setValue(value);
-        console.log(`Set value "${value}" in element: ${locator}`); 
+        console.log(`Set value "${value}" in element: ${locator}`);
     }
 
-    /** 
+    /**
      * Clear Value - Clears the current value in an input field. [removes the existing text from an input field or textarea.]
      */
     async clearValue(locator) {
@@ -196,15 +190,15 @@ class userActions {
         console.log(`Cleared value in element: ${locator}`);
     }
 
-    /** 
-     * add value - Appends text to the existing value in an input field [Append text without clearing]   
+    /**
+     * add value - Appends text to the existing value in an input field [Append text without clearing]
      */
     async addValue(locator, value) {
         const element = await $(locator);
         await element.addValue(value);
-        console.log(`Added value"${value}" in element: ${locator}`);    //[This message is printed after you’ve set or added a value to an input element.]
+        console.log(`Added value"${value}" in element: ${locator}`); //[This message is printed after you’ve set or added a value to an input element.]
     }
-        
+
     /**
      * get value - Get input field value  [Used for: input fields, textareas, or any element with a value attribute.
      * Returns: the value property (e.g. what a user has typed inside an <input> or <textarea>).]
@@ -213,11 +207,11 @@ class userActions {
     async getValue(locator) {
         const element = await $(locator);
         const value = await element.getValue();
-        console.log(`Value in element ${locator} is: ${value}`);  //[This message is printed when you are retrieving or checking the current value of the element.][majorly used for getvalue & get text]
+        console.log(`Value in element ${locator} is: ${value}`); //[This message is printed when you are retrieving or checking the current value of the element.][majorly used for getvalue & get text]
         return value;
     }
 
-    /** 
+    /**
      *get text - Get visible text  [Used for: any element that contains visible text.
      * Used for: elements that contain visible text content between tags (not in attributes).
      * Returns: the text that’s displayed to the user.
@@ -234,7 +228,6 @@ class userActions {
      * attribute value
      */
 
-
     /**
      * Element Is Displayed → returns true if the element is visible on the page (not hidden with CSS or display: none), otherwise false.
      */
@@ -248,7 +241,7 @@ class userActions {
 
     /**
      * Element Is Enabled → returns true if the element is enabled (not disabled), otherwise false.
-     * 
+     *
      */
     async iselementEnabled(locator) {
         const element = await $(locator);
@@ -260,7 +253,7 @@ class userActions {
     /**
      * element exits - Check if exists in DOM [Returns true if the element exists in the DOM (HTML structure), regardless of whether it is visible or not; otherwise, returns false.]
      */
-    async iselementExisting(locator) { 
+    async iselementExisting(locator) {
         const element = await $(locator);
         const isExisting = await element.isExisting();
         console.log(`Element ${locator} exists in DOM: ${isExisting}`);
@@ -277,19 +270,16 @@ class userActions {
         return isclickable;
     }
 
-
-    /** 
+    /**
      * wait until element is displayed - Waits until the specified element is displayed on the page. [waits until the element becomes visible on the page — not just existing in the DOM, but actually displayed.]
      */
     async waitUntillElementIsDispayed(locator, timeout = 5000) {
         const element = await $(locator);
         await element.waitForDisplayed({ timeout });
-        console.log ( `Waited untill element ${locator} is displayed`)
-
+        console.log(`Waited untill element ${locator} is displayed`);
     }
 
-
-    /** 
+    /**
      * wait until element is clickable - Waits until the specified element is clickable on the page [Waits until an element is visible and enabled, meaning it can actually be clicked.]
      */
     async waitUntilElementIsClickable(locator, timeout = 5000) {
@@ -298,7 +288,7 @@ class userActions {
         console.log(`Waited until element ${locator} is clickable`);
     }
 
-    /** 
+    /**
      * wait until element exists - Waits until the specified element exists in the DOM [Waits until the element exists in the DOM, whether it’s visible or not.]
      */
     async waitUntilElementExists(locator, timeout = 5000) {
@@ -306,7 +296,6 @@ class userActions {
         await element.waitForExist({ timeout });
         console.log(`Waited until element ${locator} exists in DOM`);
     }
-
 
     //  Function for dropdown selection -- three ways are there to select value from dropdown
     /**
@@ -318,7 +307,7 @@ class userActions {
         console.log(`Selected ${text} from the dropdown ${locator}`);
     }
 
-    /** 
+    /**
      * 2. select by attribute value - Selects an option from a dropdown by its attribute value.[Each <option> tag can have attributes like value, id, etcYou can select based on those attribute values.]
      */
 
@@ -328,37 +317,14 @@ class userActions {
         console.log(`Selected option with ${attribute}="${value}" from the dropdown ${locator}`);
     }
 
-    /** 
+    /**
      * 3. select by index - Selects an option from a dropdown by its index position.You can select based on the position of the option in the dropdown list.Index starts at 0.
      */
-    async selectFromDropDownByIndex(locator, index) {
+    async selectOptionFromDropDownBasedOnIndex(locator, index) {
         const element = await $(locator);
         await element.selectByIndex(index);
         console.log(`Selected option at index ${index} from the dropdown ${locator}`);
     }
-
-
-
-      
-
-
-
-
-
-
-    
-
-
-
-
-   
-
-
-
-
-
-
-
 }
 
 export default new userActions();

@@ -51,14 +51,23 @@ class asserUtils {
         console.log(`Verified that element ${element} is not clickable on the page.`);
     }
 
-    async 
+    async verifyElementToBeFocused(element) {
+        const webElement = await $(element);
+        await expect(webElement).toBeFocused();
+        console.log(`Verified that element ${element} is focused on the page.`);
+    }
+
+    async verifyElementIsNotFocused(element) {
+        const webElement = await $(element);
+        await expect(webElement).not.toBeFocused();
+        console.log(`Verified that element ${element} is not focused on the page.`);
+    }
 
 
 
-
-
-
-
+/**
+ * Element Content Assertions 
+ */
 
 
     async verifyElementToHaveText(element, expectedText) {
@@ -66,6 +75,8 @@ class asserUtils {
         await expect(webElement).toHaveText(expectedText);
         console.log(`Verified that element ${element} has text: ${expectedText}.`);
     }
+
+
 
 
 
@@ -89,3 +100,4 @@ class asserUtils {
 
 
 }
+export default new asserUtils();

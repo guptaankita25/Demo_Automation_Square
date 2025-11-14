@@ -21,9 +21,8 @@ export const config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        "../test/specs/login_test.js",
-
-
+        //'../test/specs/login_test.js',
+        '../test/specs/property_test.js',
     ],
     // Patterns to exclude.
     exclude: [
@@ -91,7 +90,7 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://qa-my.innago.com/login-with-auth0',
+    baseUrl: "https://qa-my.innago.com/login-with-auth0",
 
     //
     // Default timeout for all waitFor* commands.
