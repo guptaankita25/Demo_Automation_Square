@@ -6,6 +6,12 @@ import menu_page from "../pageobjects/menu_page";
 import propertyMS_page from "../pageobjects/propertyMS_page";
 import randomUtils from "../../utils/randomUtils";
 import testData from "../../mocks/testData";
+import assertUtils from "../../utils/assertUtils";
+import calender from "../../utils/calender.js";
+//import { add } from "winston";
+
+//import { assign } from "nodemailer/lib/shared";
+//import { use } from "react";
 
 describe("TC to create a new property & create a lease", function () {
     let poUser;
@@ -15,39 +21,40 @@ describe("TC to create a new property & create a lease", function () {
         poUser = userData.env.qa.poUsers.po1;
     });
 
-    it("TC to verify the creation of new lease", async () => {
-        let addressinformation = {
-            propertyName: await randomUtils.randomAlphabets(9),
-            houseNumber: "House Number" + (await randomUtils.generateRandomNumber(6)),
-            streetName: (await randomUtils.randomAlphabets(9)) + "street",
-            zipCode: await randomUtils.generateRandomNumber(5),
-            city: await randomUtils.getRandomValueFromArray(testData.po.newProperty.city_List),
-            state: await randomUtils.getRandomValueFromArray(testData.po.newProperty.state_List),
-            propertyType: await randomUtils.getRandomValueFromArray(testData.po.newProperty.property_Type),
-        };
+    after(async function () {
+        await innagoLoginPage.logout();
+    });
 
+    xit("TC to Create a Property and lease M2M", async () => {
         await userActions.waitFor(5000); // Wait for 5 seconds before entering credentials
         await browser.maximizeWindow();
         console.log("Launching innago Url");
         await innagoLoginPage.loginIn(poUser.userName, poUser.password);
         await menu_page.navigateToProperties();
         await userActions.waitFor(5000);
-        await userActions.clickOn(propertyMS_page.locators.addPropertyDetails.addProperty_Button, 5000);
-        await userActions.waitFor(5000);
-
-        await userActions.clickOn(propertyMS_page.locators.addPropertyDetails.addressCollapse_Icon);
-
-        await userActions.enterText(
-            propertyMS_page.locators.addPropertyDetails.addressLine1_Input,
-            addressinformation.houseNumber + "" + addressinformation.streetName
-        );
-
-        await userActions.enterText(propertyMS_page.locators.addPropertyDetails.city_Input, addressinformation.city);
-
-        await userActions.enterText(propertyMS_page.locators.addPropertyDetails.zipCode_Input, addressinformation.zipCode.toString());
-
-        await userActions.selectOptionFromDropDownBasedOnIndex(propertyMS_page.locators.addPropertyDetails.state_Dropdown, 1);
-
-        await userActions.waitFor(2000);
+        await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingM2MLeaseTermDetails_Monthly();
+        
     });
+
+    it("TC to create a fixed term lease Monthly", async () => {
+    
+        await userActions.waitFor(5000); // Wait for 5 seconds before entering credentials
+        await browser.maximizeWindow();
+        console.log("Launching innago Url");
+        await innagoLoginPage.loginIn(poUser.userName, poUser.password);
+        await menu_page.navigateToProperties();
+        await userActions.waitFor(5000);
+        await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingFixedTermLeaseDetails_Monthly();
+     
+    });
+
+    
+
+
+
+
+
+
 });

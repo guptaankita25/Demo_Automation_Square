@@ -5,6 +5,8 @@ class userActions {
     async clickOn(element, extraTime) {
         const webElement = await $(element);
         await webElement.click();
+        await this.waitFor(extraTime || 3000);
+        console.log(`Clicked on element: ${element}`);
     }
 /** 
     //enter text - Because enterText() expects text (a string), not a number.
@@ -15,6 +17,7 @@ class userActions {
         //await webElement.waitForDisplayed({ timeout: extraTime || 5000 });
         await webElement.clearValue(); // optional: clears previous text
         await webElement.setValue(value); // types the new text
+        await this.waitFor(extraTime || 3000);
         console.log(`Entered text "${value}" in ${element}`);
     }
 
@@ -130,6 +133,19 @@ class userActions {
         await browser.pause(2000); // Wait for 2 seconds after deleting cookies
     }
 
+    /**
+     * scroll to element - Scrolls the page to bring the specified element into view
+     * @param {string} locator - The locator of the element to scroll to    
+     * @returns {Promise<void>} a Promise that resolves when the page is scrolled to the element
+     */
+    async scrollToElement(locator) {
+        const element = await $(locator);
+        await element.scrollIntoView();
+        await browser.pause(2000);
+    }
+
+
+    
     /**
      * Element Interaction Commands
      */
@@ -323,6 +339,8 @@ class userActions {
     async selectOptionFromDropDownBasedOnIndex(locator, index) {
         const element = await $(locator);
         await element.selectByIndex(index);
+        await this.waitFor(2000);
+
         console.log(`Selected option at index ${index} from the dropdown ${locator}`);
     }
 }

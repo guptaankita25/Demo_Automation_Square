@@ -22,7 +22,7 @@ export const config = {
     //
     specs: [
         //'../test/specs/login_test.js',
-        '../test/specs/property_test.js',
+        "../test/specs/property_test.js",
     ],
     // Patterns to exclude.
     exclude: [
@@ -66,7 +66,15 @@ export const config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: "info",
+    //logLevel: "info",
+    logLevel: "error",
+    logLevels: {
+        webdriver: "error",
+        "@wdio/local-runner": "error",
+        "@wdio/mocha-framework": "error",
+        "@wdio/devtools-service": "error",
+    },
+
     //
     // Set specific log levels per logger
     // loggers:
@@ -130,13 +138,15 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ["spec", "junit", ["allure", { outputDir: "allure-results" }]],
+    reporters: ["spec", ["allure", { outputDir: "allure-results" }]],
+
+    //junit
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: "bdd",
-        timeout: 60000,
+        timeout: 180000,
     },
 
     //

@@ -74,5 +74,61 @@
 | `console.error()` | Print errors        |
 | `console.table()` | Print table of data |
 
+9.math.pow [Math.pow(base, exponent)
+
+base → the number you want to raise
+exponent → the power you want to raise it to
+Math.pow(2, 3);   // 8   (2³)]
+
+10.  in the cases of locators, you can use the following CSS attribute selectors to locate elements based on partial matches of their attributes:
+| Operator | Meaning           | Example          |
+| -------- | ----------------- | ---------------- |
+| `^=`     | Starts with       | `id^="mat-"`     |
+| `$=`     | Ends with         | `id$="-button"`  |
+| `*=`     | Contains anywhere | `id*="calendar"` |
+
+11.Use following:: when the element you want to reach is NOT a direct sibling or child, but appears somewhere after the reference element in the page's DOM, e.g.:
+When the target element is not directly connected (not a sibling or child).
+
+When the layout is complex, such as Angular/Material components.
+
+When the element visually appears after another but DOM structure is nested.
+
+🧠 How following:: works
+
+It selects all nodes in the document that come after the current node (in source order).
+
+It does not check level or hierarchy.
+
+It’s broader than following-sibling::, which only matches siblings.
+
+| You use it when…                                             | Why?                          |
+| ------------------------------------------------------------ | ----------------------------- |
+| The desired element is somewhere *after* a reference element | Ensures order-based searching |
+| Parent/child or sibling relationships are unreliable         | DOM often messy in frameworks |
+| You want the first matching element after another            | Use `[1]` as in your locator  |
+
+12. return date.getDate();
+
+.getDate() is a built-in method
+
+It returns the day of the month (1–31)  [It returns today’s day number (like 1, 2, 3 … 31).]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  */

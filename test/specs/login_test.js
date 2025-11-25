@@ -19,6 +19,11 @@ describe('TC to verify all the valiadtion of login page', function () {
         
     });
 
+    after(async function() {
+        await innagoLoginPage.logout();    
+    });
+
+
 
     
 
