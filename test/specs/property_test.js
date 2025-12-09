@@ -15,6 +15,7 @@ import calender from "../../utils/calender.js";
 
 describe("TC to create a new property & create a lease", function () {
     let poUser;
+    
 
     before(async function () {
         await userActions.navigateToGivenUrl();
@@ -25,36 +26,34 @@ describe("TC to create a new property & create a lease", function () {
         await innagoLoginPage.logout();
     });
 
-    xit("TC to Create a Property and lease M2M", async () => {
-        await userActions.waitFor(5000); // Wait for 5 seconds before entering credentials
+    it("TC to Create a Property and lease M2M", async () => {
+        await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");
         await innagoLoginPage.loginIn(poUser.userName, poUser.password);
         await menu_page.navigateToProperties();
         await userActions.waitFor(5000);
-        await propertyMS_page.createNewProperty();
-        await propertyMS_page.addingM2MLeaseTermDetails_Monthly();
+        let createdPropertyName = await propertyMS_page.createNewProperty();
         
+
+        await propertyMS_page.addingM2MLeaseTermDetails_Monthly();
+
+        console.log(createdPropertyName);
+
+        await menu_page.navigateToProperties();
+        await propertyMS_page.applyFilterOnProperties([createdPropertyName.propertyName]);
+        console.log(applyFilterOnProperties);
+        await propertyMS_page.selectGivenPropertyFromList([createdPropertyName.propertyName]);
     });
 
-    it("TC to create a fixed term lease Monthly", async () => {
-    
-        await userActions.waitFor(5000); // Wait for 5 seconds before entering credentials
+    xit("TC to create a fixed term lease Monthly", async () => {
+        await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");
         await innagoLoginPage.loginIn(poUser.userName, poUser.password);
         await menu_page.navigateToProperties();
-        await userActions.waitFor(5000);
+        await userActions.waitFor(8000);
         await propertyMS_page.createNewProperty();
-        await propertyMS_page.addingFixedTermLeaseDetails_Monthly();
-     
+        await propertyMS_page.addingFixedTermLeaseDetails_Monthly(); /// check this first
     });
-
-    
-
-
-
-
-
-
 });

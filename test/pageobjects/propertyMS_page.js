@@ -7,6 +7,7 @@ import testData from "../../mocks/testData";
 import { browser } from "@wdio/globals";
 import userData from "../../mocks/userData";
 import calender from "../../utils/calender.js";
+//import { number } from "yargs";
 
 class properties_page {
     locators = {
@@ -43,9 +44,7 @@ class properties_page {
             rent_Amount_Input: '//input[@name="amount"]',
             due_On_Date_Dropdown: '//select [@name="dueOnMonthly"]',
             first_Invoice_Date_Input: '//select[@name="firstRentalInvoiceDate"]',
-            payment_Schedule_Dropdown: {
-
-            },
+            payment_Schedule_Dropdown: {},
         },
 
         fixed_TermDetails: {
@@ -61,7 +60,6 @@ class properties_page {
             },
             due_On_Dropdown_Monthly_FixedTerm: '//select[@name="dueOnMonthly"]',
             first_Invoice_Date_Input_FixedTerm: '//select[@name="firstRentalInvoiceDate"]',
-
         },
 
         deposit_Details: {
@@ -83,15 +81,96 @@ class properties_page {
         renterInsurance_Details: {
             next_Button_RenterInsuranceDetails: '//button[@data-locator="qa-renter-insurance-9"]',
         },
-        
 
         finalize_Lease: {
             offline_Signature_Checkbox: "#upload-signed-lease",
             confirm_Invite_Button: "#done-btn",
         },
+
+        propertyFilter: {
+            filter_Dropdown: '//div[@id="filter-dropdown"]/in-icon[2]',
+            property_Dropdown_Option: '//ng-select[@formcontrolname= "propertyIds"]',
+            property_Search_Field: 'input[placeholder="search"]',
+            firstPropertyCheckBox: "//ng-dropdown-panel/div[2]/div[2]/div/span",
+            apply_Filter: "#apply-filter",
+            clear_Filter: "#clear-filter",
+            city_Label: '#city-label',
+            city_Dropdown: '#city-list',
+            city_Search_Input: '//div[1]/ng-select/div/div/div[2]/input',
+
+            getCityAsPerName: function (cityName) {
+                return `//span[text() ="${cityName}"]`;
+            },
+            state_Dropdown: "#state-list",
+            getStateAsPerName: function (stateName) {
+                return `//span[text() ="${stateName}"]`;
+            },
+            zipCode_Input: "#zip-code",
+            status_Dropdown: "#status-list",
+            getStatusAsPerName: function (statusName) {
+                return `//span[text() ="${statusName}"]`;
+            },
+            getPropertyByName: function (propertyName) {
+                return `//div[contains(text(),"${propertyName}")]`;
+            },
+            numberOfUnits_Input: "#no-of-unit",
+            hasOpen_Maintenance_Checkbox: "#has-open-maintenance",
+            viewArchived_Properties_Checkbox: "#view-archived-property",
+        },
     };
 
     //Creating Dynamic function
+
+    async applyFilterOnProperties(properties,city) {
+        console.log("Applying filter on properties");
+    //    if (properties != null) {
+    //        properties = String(properties).split(",");
+    //    } else {
+    //        properties = []; // no properties provided
+    //    }
+        await userActions.clickOn(this.locators.propertyFilter.filter_Dropdown);
+        if (properties !== undefined && properties !== null) {
+            console.log("Filtering on properties: " + properties);
+            await userActions.clickOn(this.locators.propertyFilter.property_Dropdown_Option);
+            for (let i = 0; i < properties.length; i++) {
+                await userActions.clearValue(this.locators.propertyFilter.property_Search_Field);
+                await userActions.enterText(this.locators.propertyFilter.property_Search_Field, properties[i]);
+                await userActions.waitFor(2000);
+                await assertUtils.verifyElementToHaveText(this.locators.propertyFilter.firstPropertyCheckBox, properties[i]);
+                await userActions.clickOn(this.locators.propertyFilter.firstPropertyCheckBox);
+                await userActions.clickOn(this.locators.propertyFilter.property_Dropdown_Option); //closing the dropdown
+            }
+        }
+
+        // if (city != undefined && city !== null) {
+        //     //console.log("Filtering on city: " + city);
+        //     await userActions.clickOn(this.locators.propertyFilter.city_Search_Input);
+        //     await userActions.enterText(this.locators.propertyFilter.city_Search_Input, city); 
+        //     await userActions.waitFor(5000);
+
+        //     await userActions.clickOn(this.locators.propertyFilter.getCityAsPerName(city));
+        // }
+
+        await userActions.waitFor(2000);
+        await userActions.clickOn(this.locators.propertyFilter.apply_Filter);
+        await userActions.waitFor(2000);
+    }
+
+
+
+
+
+
+
+
+
+
+    
+    async selectGivenPropertyFromList(propertyName) {
+        console.log("Selecting property: " + propertyName);
+        await userActions.clickOn(this.locators.propertyFilter.getPropertyByName(propertyName));
+    }
+
     async createNewProperty() {
         let addressinformation = {
             propertyName: await randomUtils.randomAlphabets(9),
@@ -125,6 +204,7 @@ class properties_page {
         await userActions.clickOn(this.locators.addPropertyDetails.next_Button_UnitDetails);
         await userActions.clickOn(this.locators.addPropertyDetails.bank_Account_selection);
         await userActions.clickOn(this.locators.addPropertyDetails.save_Button_Property_Setting);
+        return addressinformation;
     }
 
     async addingM2MLeaseTermDetails_Monthly() {
@@ -170,11 +250,12 @@ class properties_page {
         await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
         await userActions.clickOn(this.locators.fixed_TermDetails.fixed_Term_Type_RadioButton);
         await userActions.clickOn(this.locators.fixed_TermDetails.calendar_Click_Input);
-        await calender.setNextMonthGivenDate("19");
+        await calender.setSameDateOfNextYear();
         await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
         await userActions.enterText(this.locators.deposit_Details.deposit_Amount_Input, "150");
         await userActions.clickOn(this.locators.deposit_Details.due_On_Calendar_Input);
         await calender.setNextMonthGivenDate("3");
+        //await calender.setPreviousMonthGivenDate("15");
         await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "2000");
         await userActions.clickOn(this.locators.fixed_TermDetails.due_On_Dropdown_Monthly_FixedTerm);
         await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.fixed_TermDetails.due_On_Dropdown_Monthly_FixedTerm, 2);
@@ -186,13 +267,13 @@ class properties_page {
         await userActions.enterText(this.locators.add_TenantDetails.email_Input, addressinformation2.email);
         await userActions.enterText(this.locators.add_TenantDetails.phone_Input, addressinformation2.phone);
         await userActions.clickOn(this.locators.add_TenantDetails.application_Screening_Dropdwon);
+
         await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.add_TenantDetails.application_Screening_Dropdwon, 4);
         await userActions.waitFor(5000);
         await userActions.clickOn(this.locators.add_TenantDetails.next_Button_TenantDetails);
         await userActions.clickOn(this.locators.renterInsurance_Details.next_Button_RenterInsuranceDetails);
         await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
-
     }
 }
 

@@ -6,7 +6,13 @@ class dateUtils {
         return date.getDate();
     }
     
-    
+    getCurrentMonthInString() {
+        let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        let date = new Date();
+        let month = date.getMonth();
+        return monthNames[month];
+
+    }
 
 
 
