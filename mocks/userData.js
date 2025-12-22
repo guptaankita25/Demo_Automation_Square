@@ -8,9 +8,10 @@ class userData {
                     password: "Pass@123",
                 },
 
-                // po2: {
-
-                // }
+                po2: {
+                    userName: "satyapal.kumar@taazaa.com",
+                    password: "Pass@123",
+                },
             },
         },
     };

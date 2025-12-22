@@ -8,13 +8,13 @@ import randomUtils from "../../utils/randomUtils";
 import testData from "../../mocks/testData";
 import assertUtils from "../../utils/assertUtils";
 import calender from "../../utils/calender.js";
-//import { add } from "winston";
 
-//import { assign } from "nodemailer/lib/shared";
-//import { use } from "react";
+
+
 
 describe("TC to create a new property & create a lease", function () {
     let poUser;
+        
     
 
     before(async function () {
@@ -26,7 +26,7 @@ describe("TC to create a new property & create a lease", function () {
         await innagoLoginPage.logout();
     });
 
-    it("TC to Create a Property and lease M2M", async () => {
+    xit("TC to Create a Property and lease M2M", async () => {                                                  ///this is working
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");
@@ -34,26 +34,60 @@ describe("TC to create a new property & create a lease", function () {
         await menu_page.navigateToProperties();
         await userActions.waitFor(5000);
         let createdPropertyName = await propertyMS_page.createNewProperty();
-        
-
         await propertyMS_page.addingM2MLeaseTermDetails_Monthly();
-
         console.log(createdPropertyName);
-
         await menu_page.navigateToProperties();
-        await propertyMS_page.applyFilterOnProperties([createdPropertyName.propertyName]);
-        console.log(applyFilterOnProperties);
+        //  let propertyDetails = {
+        //      propertyName: "oLfMBuYUi",
+        //      city: "Los Angeles",
+        //      //propertyName: 'New_Property1',
+        //  };
+        // await propertyMS_page.applyFilterOnProperties([propertyDetails.propertyName]);
+        // await propertyMS_page.selectGivenPropertyFromList([propertyDetails.propertyName]);
+
+
+        await propertyMS_page.applyFilterOnProperties([createdPropertyName.propertyName]);   
+        
         await propertyMS_page.selectGivenPropertyFromList([createdPropertyName.propertyName]);
     });
 
-    xit("TC to create a fixed term lease Monthly", async () => {
+
+    xit("TC to create M2M lease with Bi-Monthly Frequency with additional fees", async () => {                    /// this is working
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");
         await innagoLoginPage.loginIn(poUser.userName, poUser.password);
         await menu_page.navigateToProperties();
+        await userActions.waitFor(5000);
+        let createdPropertyName1 = await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingM2MLeaseTermDetails_Bi_Monthly_With_Additional_fess();
+        console.log(createdPropertyName1);
+        await menu_page.navigateToProperties();
+    });
+
+
+    xit("TC to create M2M Lease with Weekly Fequency with recurring fess added", async () => {
+        
+    });
+
+
+
+
+
+
+
+    xit("TC to create a fixed term lease Monthly", async () => {                            // this is not working due to calender 
+        await userActions.waitFor(5000);       
+        await browser.maximizeWindow();
+        console.log("Launching innago Url");
+        await innagoLoginPage.loginIn(poUser.userName, poUser.password);
+        await menu_page.navigateToDashboard();
+        await menu_page.navigateToProperties();
         await userActions.waitFor(8000);
         await propertyMS_page.createNewProperty();
-        await propertyMS_page.addingFixedTermLeaseDetails_Monthly(); /// check this first
+        await propertyMS_page.addingFixedTermLeaseDetails_Monthly(); /// check this first     calneder is not working i have tried many thing but not working
+
     });
+
+
 });

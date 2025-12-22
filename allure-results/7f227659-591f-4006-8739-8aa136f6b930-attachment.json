@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//table[contains(@class, \"table-look\")]//tbody/tr[2]//input[@placeholder=\"Phone Number\"]"
+}
