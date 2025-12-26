@@ -51,37 +51,54 @@ class properties_page {
                 payment_Schedule_Dropdown_BiMonthly_First: '//select[@name="dueDateBiMonthlyStart"]',
                 payment_Schedule_Dropdown_BiMonthly_Second: '//select[@name="dueDateBiMonthlyEnd"]',
                 first_Invoice_Due_Date_BiMonthly: '//select[@name="firstRentalInvoiceDate"]',
-
-                payment_Schedule_Dropdown_Weekly: "",
             },
+            payment_Schedule_Dropdown_Weekly: {
+                payment_Schedule_Dropdown_Weekly_New: '//select[@name="dueweek"]',
+                first_Rental_Invoice_Weekly: '//select[@name="selectedMonthForWeekly"]',
+                select_first_Rental_Invoice_Weekly: '//input[@name="usage"]',
+            },
+            view_And_Edit_Rent_Scheduled: {
+
+
+            },
+
+        
         },
 
         add_Additional_Fees_Section: {
             add_additional_Fees: '//button[contains(text(), " Add Additional Fee (Optional)")]',
             cross_icon: '(//img[@alt="Close"])[2]',
             item_Dropdown: '//div[@class="innago-multiselect-field"]',
-            ////select_Item_Checkbox: '//label[normalize-space()="Maintenance Request"]/preceding-sibling::input',
             select_Item_Checkbox: '//label[normalize-space()="Maintenance Request"]',
-
-            // select_Item_Checkbox: function (typeName) {
-            //     //return `//label[text() = "${typeName}"]`;
-            //     //return `//label[@for="select-item-0-"${typeName}"]"`;
-            //     //return `//label[normalize-space()="${typeName}"]`;
-            //     return `//label[normalize-space()="${typeName}"]/preceding-sibling::input`;
-            // },
-
+            select_Item_Checkbox_LateFess: '//label[normalize-space()="Late Fee Charge"]',
+            add_New_Item: '//button[contains(text(), "Add Item")]',
             description_Input: '//input[@placeholder="Description"]',
             rate_Input: '//input[@id="rate0"][1]',
             quantity_Input: '//input[@id="qty0"][1]',
             notes_addon: "#notes",
             recurring_Invoice_Toggle_Switch: '//div[@class="simple-switch"]',
+            recurring_Invoice_Switch_ON: {
+                payement_Frequency_Dropdown: '//select[@id="paymentfrequency"]',
+                due_On_Monthly: '//select[@id="dueOnDayMonthly"]',
+                start_Date_Monthly: '//select[@id="startDateOnInvoice"]',
+                End_Date_Monthly: '//select[@id="endDateOnInvoice"]',
+            },
             cancel_Button: '//button[text() ="Cancel"]',
             create_Button: '//button[text() = " Create "]',
             make_This_A_Line_Item_On_The_Rental_Invoice: {
-                line_Item_Rental_Invoice: '//label[@for="rental-invoice-attach"]',
+                line_Item_Rental_Invoice: 'label[for="rental-invoice-attach"]',
                 start_Date: "#startDateOnInvoice",
                 end_Date: "#endDateOnInvoice",
             },
+            new_Item_Added_Additional_Fees: {
+                item_Dropdown_new: '//tbody/tr[2]/td[1]/div[1]/div[1]/div[1][@class="innago-multiselect-field"]',
+                add_Item_Type_New: '(//input[@placeholder="Add Item Type"])[2]',
+                plus_Icon_Add_New_Item: "//table/tbody//tr[2]/td/div/div//div//div//div[2]/button",
+                description_Input_New: '//table/tbody//tr[2]//td[2]/div/div/input[@placeholder="Description"]',
+                quantity_New_Input: '//table/tbody//tr[2]//td[3]/div/div/input[@id="qty1"]',
+                rate_New_Input: '//table/tbody//tr[2]//td[4]/div/div/input[@id="rate1"]',
+            },
+            recurring_Invoice_Heading: '//h4[@name="recurring-item-heading"]',
         },
 
         fixed_TermDetails: {
@@ -242,6 +259,7 @@ class properties_page {
         return addressinformation;
     }
 
+    //M to M lease cases
     async addingM2MLeaseTermDetails_Monthly() {
         let addressinformation1 = {
             fname: await randomUtils.randomAlphabets(5),
@@ -273,7 +291,6 @@ class properties_page {
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
     }
 
-    
     async addingM2MLeaseTermDetails_Bi_Monthly_With_Additional_fess() {
         let addressinformation2 = {
             fname: await randomUtils.randomAlphabets(5),
@@ -346,12 +363,181 @@ class properties_page {
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
     }
 
-
-
-
     async addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess() {
-        
+        let addressinformation3 = {
+            description1: "New" + (await randomUtils.randomAlphabets(3)),
+            description2: "New" + (await randomUtils.randomAlphabets(3)),
 
+            fname: await randomUtils.randomAlphabets(5),
+            lastname: await randomUtils.randomAlphabets(7),
+            email: "random" + (await randomUtils.generateRandomNumber(4)) + "@yopmail.com",
+            phone: "99999" + (await randomUtils.generateRandomNumber(5)),
+        };
+
+        await assertUtils.verifyElementExistsonPage(this.locators.addPropertyDetails.add_Lease_Button_Verify);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
+        await userActions.clickOn(this.locators.lease_TermDetails.m2m_Lease_Type_RadioButton);
+        await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Frequency_Dropddown);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lease_TermDetails.payment_Frequency_Dropddown, 3);
+        await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "500");
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.payment_Schedule_Dropdown_Weekly_New);
+
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.payment_Schedule_Dropdown_Weekly_New,
+            2
+        );
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.select_first_Rental_Invoice_Weekly);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.add_additional_Fees);
+
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.item_Dropdown);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.select_Item_Checkbox);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.item_Dropdown);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.description_Input, addressinformation3.description1);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.quantity_Input, 7);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.rate_Input, 30);
+
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.add_New_Item);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.item_Dropdown_new);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.add_Item_Type_New);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.add_Item_Type_New, "New");
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.plus_Icon_Add_New_Item);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.item_Dropdown_new);
+        await userActions.enterText(
+            this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.description_Input_New,
+            addressinformation3.description2
+        );
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.quantity_New_Input, 6);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.rate_New_Input, 30);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Toggle_Switch);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.payement_Frequency_Dropdown);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.payement_Frequency_Dropdown,
+            1
+        );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.due_On_Monthly);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.due_On_Monthly,
+            1
+        );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.start_Date_Monthly);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.start_Date_Monthly,
+            1
+        );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.End_Date_Monthly);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.recurring_Invoice_Switch_ON.End_Date_Monthly,
+            2
+        );
+
+        //await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.line_Item_Rental_Invoice);   /// check the locatos for lne item
+        //await userActions.waitFor(2000);
+        // await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date);
+        // await userActions.selectOptionFromDropDownBasedOnIndex(
+        //     this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date,
+        //     1
+        // );
+        // await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.end_Date);
+        // await userActions.selectOptionFromDropDownBasedOnIndex(
+        //     this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.end_Date,
+        //     2
+        // );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.create_Button);
+
+        await assertUtils.verifyElementExistsonPage(this.locators.add_Additional_Fees_Section.recurring_Invoice_Heading);
+        await userActions.clickOn(this.locators.add_TenantDetails.add_Tenant_Button);
+        await userActions.enterText(this.locators.add_TenantDetails.fname_Input, addressinformation3.fname);
+        await userActions.enterText(this.locators.add_TenantDetails.lname_Input, addressinformation3.lastname);
+        await userActions.enterText(this.locators.add_TenantDetails.email_Input, addressinformation3.email);
+        await userActions.enterText(this.locators.add_TenantDetails.phone_Input, addressinformation3.phone);
+        await userActions.clickOn(this.locators.add_TenantDetails.application_Screening_Dropdwon);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.add_TenantDetails.application_Screening_Dropdwon, 4);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.add_TenantDetails.each_Tenant_Is_Only_Responsible_Checkbox);
+        await userActions.clickOn(this.locators.add_TenantDetails.next_Button_TenantDetails);
+        await userActions.clickOn(this.locators.renterInsurance_Details.next_Button_RenterInsuranceDetails);
+        await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
+        await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
+    }
+
+    async addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess_Make_This_line_Item_As_Rental_Invoice() {
+        let addressinformation3 = {
+            description1: "New" + (await randomUtils.randomAlphabets(3)),
+            description2: "New" + (await randomUtils.randomAlphabets(3)),
+
+            fname: await randomUtils.randomAlphabets(5),
+            lastname: await randomUtils.randomAlphabets(7),
+            email: "random" + (await randomUtils.generateRandomNumber(4)) + "@yopmail.com",
+            phone: "99999" + (await randomUtils.generateRandomNumber(5)),
+        };
+
+        await assertUtils.verifyElementExistsonPage(this.locators.addPropertyDetails.add_Lease_Button_Verify);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
+        await userActions.clickOn(this.locators.lease_TermDetails.m2m_Lease_Type_RadioButton);
+        await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Frequency_Dropddown);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lease_TermDetails.payment_Frequency_Dropddown, 3);
+        await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "500");
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.payment_Schedule_Dropdown_Weekly_New);
+
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.payment_Schedule_Dropdown_Weekly_New,
+            2
+        );
+        await userActions.clickOn(this.locators.lease_TermDetails.payment_Schedule_Dropdown_Weekly.select_first_Rental_Invoice_Weekly);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.add_additional_Fees);
+
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.item_Dropdown);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.select_Item_Checkbox);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.item_Dropdown);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.description_Input, addressinformation3.description1);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.quantity_Input, 7);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.rate_Input, 30);
+
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.add_New_Item);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.item_Dropdown_new);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.add_Item_Type_New);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.add_Item_Type_New, "New");
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.plus_Icon_Add_New_Item);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.item_Dropdown_new);
+        await userActions.enterText(
+            this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.description_Input_New,
+            addressinformation3.description2
+        );
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.quantity_New_Input, 8);
+        await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.rate_New_Input, 30);
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Toggle_Switch);
+        await userActions.waitFor(5000),
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.line_Item_Rental_Invoice);  
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date,
+            1
+        );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.end_Date);
+        await userActions.selectOptionFromDropDownBasedOnIndex(
+            this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.end_Date,
+            2
+        );
+        await userActions.clickOn(this.locators.add_Additional_Fees_Section.create_Button);
+
+        await assertUtils.verifyElementExistsonPage(this.locators.add_Additional_Fees_Section.recurring_Invoice_Heading);
+        await userActions.clickOn(this.locators.add_TenantDetails.add_Tenant_Button);
+        await userActions.enterText(this.locators.add_TenantDetails.fname_Input, addressinformation3.fname);
+        await userActions.enterText(this.locators.add_TenantDetails.lname_Input, addressinformation3.lastname);
+        await userActions.enterText(this.locators.add_TenantDetails.email_Input, addressinformation3.email);
+        await userActions.enterText(this.locators.add_TenantDetails.phone_Input, addressinformation3.phone);
+        await userActions.clickOn(this.locators.add_TenantDetails.application_Screening_Dropdwon);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.add_TenantDetails.application_Screening_Dropdwon, 4);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.add_TenantDetails.each_Tenant_Is_Only_Responsible_Checkbox);
+        await userActions.clickOn(this.locators.add_TenantDetails.next_Button_TenantDetails);
+        await userActions.clickOn(this.locators.renterInsurance_Details.next_Button_RenterInsuranceDetails);
+        await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
+        await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
     }
 
 
@@ -362,7 +548,7 @@ class properties_page {
 
 
 
-    
+    // Fixed Term Lease cases
     async addingFixedTermLeaseDetails_Monthly() {
         let addressinformation2 = {
             fname: await randomUtils.randomAlphabets(5),
@@ -374,13 +560,12 @@ class properties_page {
         await userActions.waitFor(5000);
         await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
         await userActions.clickOn(this.locators.fixed_TermDetails.fixed_Term_Type_RadioButton);
-        await userActions.clickOn(this.locators.fixed_TermDetails.calendar_Click_Input); /// this is not working
+        await userActions.clickOn(this.locators.fixed_TermDetails.calendar_Click_Input);
         await calender.setSameDateOfNextYear();
         await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
         await userActions.enterText(this.locators.deposit_Details.deposit_Amount_Input, "150");
         await userActions.clickOn(this.locators.deposit_Details.due_On_Calendar_Input);
         await calender.setNextMonthGivenDate("3");
-        await calender.setPreviousMonthGivenDate("15");
         await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "2000");
         await userActions.clickOn(this.locators.fixed_TermDetails.due_On_Dropdown_Monthly_FixedTerm);
         await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.fixed_TermDetails.due_On_Dropdown_Monthly_FixedTerm, 2);

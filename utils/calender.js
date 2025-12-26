@@ -10,36 +10,25 @@ class Calendar {
         previos_Month_Button: '//button[@aria-label="Previous month"]',
         //previos_Month_Button: '//button[@aria-label="Previous 24 years"]',
         next_Month_Button: '//button[@aria-label="Next month"]',
-        //year_Selection_Button: 'span [id^= "mat-calendar-button-"]',
         year_Selection_Button: '//button[contains(@class,"mat-calendar-period-button")]',
 
-        ////mat-calendar-header/div/div/button//span[2]/span   --- locators for year selection
+        
 
         getGivenDate: function (currentDate) {
-            //return `//button[@aria-label= "${currentDate}"]`;
-
-            //return `//button/div[text()= "${currentDate}"]`;
-            // return `//button//span[text()= "${currentDate}"]`;
-
-            return `//mat-month-view/table//tbody//tr[5]/td/button/span[contains(text(), "${currentDate}")]`; ///try this when you run
+            return `//button/span[text()= " ${currentDate} "]`;
         },
-        getGivenYear: function (currentYear) {
-            //return `//button[@aria-label="${currentYear}"]`;
-            //return `//button/span[text()= "${currentYear}"]`;
-            //return `//button[@aria-label= "${currentYear}"]`;
-            //return `//button//div[normalize-space()="${currentYear}"]`;
+            
 
-            return `//mat-calendar/mat-calendar-header/div//span[2]/span[contains(text(),"${currentYear}")]`;
+        getGivenYear: function (currentYear) {
+            return `//button/span[text()= " ${currentYear} "]`; 
         },
 
         getGivenMonth: function (currentMonth) {
-            //return `//button[@aria-current="${currentMonth}"]`;
-            //return `//button//span[text()= "${currentMonth}"]`;
-            //return `//button//div[normalize-space()="${currentMonth}"]`;
-
-            return `//mat-year-view/table//tbody/tr[4]/td[4]/button/span[contains(text(),"${currentMonth}")]`;
+            return `//button/span[text()= " ${currentMonth} "]`;
         },
-    };
+    }
+
+ 
 
     async setNextMonthGivenDate(dateToSelect) {
         await userActions.clickOn(this.locators.next_Month_Button);
@@ -78,6 +67,8 @@ class Calendar {
             await userActions.clickOn(this.locators.getGivenDate(currentDay)); // Select same day in next year
         }
     }
+
+    
 
     async setLastDateOfFutureSixMonth() {}
 }

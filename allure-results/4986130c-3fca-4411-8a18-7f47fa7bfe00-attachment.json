@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"a[href=\"/Landlord/logout\"]\"}\n  (Session info: chrome=143.0.7499.147)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff72c1c8885\n\t0x7ff72c1c88e0\n\t0x7ff72bfa165d\n\t0x7ff72bff9a33\n\t0x7ff72bff9d3c\n\t0x7ff72c04df67\n\t0x7ff72c04ac97\n\t0x7ff72bfeac29\n\t0x7ff72bfeba93\n\t0x7ff72c4e05e0\n\t0x7ff72c4daf20\n\t0x7ff72c4f9686\n\t0x7ff72c1e5d84\n\t0x7ff72c1eed2c\n\t0x7ff72c1d1fa4\n\t0x7ff72c1d2155\n\t0x7ff72c1b7e82\n\t0x7fff056be8d7\n\t0x7fff0658c53c\n"
+}

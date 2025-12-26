@@ -64,19 +64,63 @@ describe("TC to create a new property & create a lease", function () {
         console.log(createdPropertyName1);
         await menu_page.navigateToProperties();
     });
+   
+    xit("TC to create M2M Lease with Weekly Fequency with recurring fess and also added one more item to the list for RI", async () => {             //this is working
+
+        await userActions.waitFor(5000);
+        await browser.maximizeWindow();
+        console.log("Launching innago Url");
+        await innagoLoginPage.loginIn(poUser.userName, poUser.password);
+        await menu_page.navigateToProperties();
+        await userActions.waitFor(5000);
+        let createdPropertyName2 = await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess();
+        console.log(createdPropertyName2);
+    });
 
 
-    xit("TC to create M2M Lease with Weekly Fequency with recurring fess added", async () => {
+    xit("TC to create M2M Lease with Weekly Fequency with recurring fess added and line item on rental invoice is yes", async () => {    ////mark as line item is not working only need to check this 
+        await userActions.waitFor(5000);
+        await browser.maximizeWindow();
+        console.log("Launching innago Url");
+        await innagoLoginPage.loginIn(poUser.userName, poUser.password);
+        await menu_page.navigateToProperties();
+        await userActions.waitFor(5000);
+        let createdPropertyName3 = await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess_Make_This_line_Item_As_Rental_Invoice();
+        console.log(createdPropertyName3);
+
+
+    });
+
+
+
+    it("TC to create M2M and verify the number of invoice and able to check the edit and delete invoice", async () => {
         
+
     });
 
 
 
 
+        
+        
+        
+        
+        
 
 
 
-    xit("TC to create a fixed term lease Monthly", async () => {                            // this is not working due to calender 
+
+
+
+
+
+
+
+
+
+    xit("TC to create a fixed term lease Monthly", async () => {              //this is working                   
         await userActions.waitFor(5000);       
         await browser.maximizeWindow();
         console.log("Launching innago Url");
@@ -85,7 +129,7 @@ describe("TC to create a new property & create a lease", function () {
         await menu_page.navigateToProperties();
         await userActions.waitFor(8000);
         await propertyMS_page.createNewProperty();
-        await propertyMS_page.addingFixedTermLeaseDetails_Monthly(); /// check this first     calneder is not working i have tried many thing but not working
+        await propertyMS_page.addingFixedTermLeaseDetails_Monthly(); 
 
     });
 

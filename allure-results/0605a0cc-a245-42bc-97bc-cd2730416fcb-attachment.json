@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//tbody/tr[2]/td[1]/div[1]/div[1]/div[1][@class=\"innago-multiselect-field\"]"
+}

@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"//select[@name=\"selectedMonthForWeekly\"]\"}\n  (Session info: chrome=143.0.7499.147)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff691538885\n\t0x7ff6915388e0\n\t0x7ff69131165d\n\t0x7ff691369a33\n\t0x7ff691369d3c\n\t0x7ff6913bdf67\n\t0x7ff6913bac97\n\t0x7ff69135ac29\n\t0x7ff69135ba93\n\t0x7ff6918505e0\n\t0x7ff69184af20\n\t0x7ff691869686\n\t0x7ff691555d84\n\t0x7ff69155ed2c\n\t0x7ff691541fa4\n\t0x7ff691542155\n\t0x7ff691527e82\n\t0x7fff056be8d7\n\t0x7fff0658c53c\n"
+}

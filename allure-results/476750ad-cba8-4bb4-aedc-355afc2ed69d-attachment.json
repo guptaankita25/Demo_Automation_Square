@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//button//div[normalize-space()=\"2026\"]"
+}

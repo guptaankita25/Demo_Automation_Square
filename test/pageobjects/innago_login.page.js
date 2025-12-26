@@ -10,7 +10,9 @@ class innagoLoginPage {
         signIn_Button: "",
         continue_Button: '//button[@data-action-button-primary="true"]',
         remind_Me_Later_Button: "",
-        logout_Button: 'a[href="/Landlord/logout"]',
+        //logout_Button: 'a[href="/Landlord/logout"]',
+        logout_Button: '(//img[@alt="logout"])[1]',
+
     };
 
     /** creating function */

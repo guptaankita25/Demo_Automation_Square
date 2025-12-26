@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//mat-year-view//button//span[normalize-space()=\"2026\"]"
+}
