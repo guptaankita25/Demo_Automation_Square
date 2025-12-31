@@ -1,5 +1,4 @@
-class asserUtils { 
-
+class asserUtils {
     /**
      *  mentioned below are the Element State Assertions
      */
@@ -28,7 +27,7 @@ class asserUtils {
         console.log(`Verified that element ${element} is not displayed on the page.`);
     }
 
-    async verifyElementToBeEnabled(element) { 
+    async verifyElementToBeEnabled(element) {
         const webElement = await $(element);
         await expect(webElement).tobeEnabled();
         console.log(`Verified that element ${element} is enabled on the page.`);
@@ -63,41 +62,23 @@ class asserUtils {
         console.log(`Verified that element ${element} is not focused on the page.`);
     }
 
+    /**
+     * Element Content Assertions
+     */
 
-
-/**
- * Element Content Assertions 
- */
-
-
-    async verifyElementToHaveText(element, expectedText) {
+    async verifyElementToHaveText(element, expectedText) {        /// exact match
         const webElement = await $(element);
         await expect(webElement).toHaveText(expectedText);
         console.log(`Verified that element ${element} has text: ${expectedText}.`);
     }
 
+   //partial  match >>>> conatins text 
 
+    async verifyElementsArrayCount(locator, countToCheck) {                                                         // this gives yu the count
+        await console.log(`>>> Asserting selector list count :: ${locator} Equals ${countToCheck}`);
 
-
-
-
-    
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
+        const listItems = await $$(locator);
+        await expect(listItems).toBeElementsArrayOfSize(countToCheck);
+    }
 }
 export default new asserUtils();

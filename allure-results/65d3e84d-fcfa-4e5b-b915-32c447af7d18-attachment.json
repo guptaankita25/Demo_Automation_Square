@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//app-group-invoice//div[2]/div[3]/div[1]//input[@data-locator=\"invoiceRentEditable\"]"
+}

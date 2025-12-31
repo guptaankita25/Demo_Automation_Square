@@ -22,7 +22,8 @@ export const config = {
     //
     specs: [
         //'../test/specs/login_test.js',
-        "../test/specs/property_test.js",
+        //"../test/specs/property_test.js",
+        "../test/specs/property_Details_Page.js",
     ],
     // Patterns to exclude.
     exclude: [
@@ -140,6 +141,17 @@ export const config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ["spec", ["allure", { outputDir: "allure-results" }]],
+    // reporters: [
+    //     "spec",
+    //     [
+    //         "allure",
+    //         {
+    //             outputDir: "allure-results",
+    //             disableWebdriverStepsReporting: true,
+    //             disableWebdriverScreenshotsReporting: false,
+    //         },
+    //     ],
+    // ],
 
     //junit
 

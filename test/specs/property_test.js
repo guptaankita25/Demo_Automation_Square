@@ -12,6 +12,8 @@ import calender from "../../utils/calender.js";
 
 
 
+
+
 describe("TC to create a new property & create a lease", function () {
     let poUser;
         
@@ -79,7 +81,7 @@ describe("TC to create a new property & create a lease", function () {
     });
 
 
-    xit("TC to create M2M Lease with Weekly Fequency with recurring fess added and line item on rental invoice is yes", async () => {    ////mark as line item is not working only need to check this 
+    xit("TC to create M2M Lease with Weekly Fequency with recurring fess added and line item on rental invoice is yes", async () => {      
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");
@@ -90,34 +92,22 @@ describe("TC to create a new property & create a lease", function () {
         await propertyMS_page.addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess_Make_This_line_Item_As_Rental_Invoice();
         console.log(createdPropertyName3);
 
+    });g
 
+
+    xit("TC to create M2M and verify the number of invoice and able to check the edit and delete invoice", async () => {        
+        await userActions.waitFor(5000);
+        await browser.maximizeWindow();
+        console.log("Launching innago Url");
+        await innagoLoginPage.loginIn(poUser.userName, poUser.password);
+        await menu_page.navigateToProperties();
+        await userActions.waitFor(5000);
+        let createdPropertyName4 = await propertyMS_page.createNewProperty();
+        await propertyMS_page.addingM2MleaseTermDetails_Monthly_View_Edit_Rent_Scheduled();
+        console.log(createdPropertyName4);
+
+        
     });
-
-
-
-    it("TC to create M2M and verify the number of invoice and able to check the edit and delete invoice", async () => {
-        
-
-    });
-
-
-
-
-        
-        
-        
-        
-        
-
-
-
-
-
-
-
-
-
-
 
 
     xit("TC to create a fixed term lease Monthly", async () => {              //this is working                   

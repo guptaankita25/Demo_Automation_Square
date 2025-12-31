@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//div[@class=\"lease-summary-inner ng-star-inserted\"]/div[3]"
+}

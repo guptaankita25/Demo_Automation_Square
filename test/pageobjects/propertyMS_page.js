@@ -7,7 +7,7 @@ import testData from "../../mocks/testData";
 import { browser } from "@wdio/globals";
 import userData from "../../mocks/userData";
 import calender from "../../utils/calender.js";
-import { th } from "@faker-js/faker";
+//import { th } from "@faker-js/faker";
 //import { use } from "react";
 //import { number } from "yargs";
 
@@ -58,11 +58,22 @@ class properties_page {
                 select_first_Rental_Invoice_Weekly: '//input[@name="usage"]',
             },
             view_And_Edit_Rent_Scheduled: {
-
-
+                total_Number_Of_Invoices_Heading: 'p[name="totals-invoices-paragraph"]',
+                total_Number_Of_Invoice_Count: '//p[@name="totals-invoices-count-paragraph"]',
+                view_Edit_Rent_Scheduled: '//button[@data-locator="qa-view-edit-rent-schedule"]',
+                action_Button_Three_Dot: '//div[@class="lease-summary-inner ng-star-inserted"]//div[2]/div/div[4]',
+                action_Button_Three_Dot_Second_Row: '//a[normalize-space()="Edit"]//img[@alt="Edit"]',
+                edit_Button: '//a[normalize-space()="Edit"]',
+                delete_Button: '//a[normalize-space()="Delete"]',
+                //calender_Input: "//app-group-invoice//div[2]/div[2]/div/div[2]/div//mat-datepicker-toggle",  /// ankita
+                calender_Input: '//datepicker[@data-locator="invoiceDueDate"]//button[@aria-label="Open calendar"]',
+                calender_Input_Second_Row: "",
+                rent_Input: '//input[@data-locator="invoiceRentEditable"]',
+                rent_Input_Second_Row: '(//input[@placeholder="0"])[1]',
+                save_Button: '(//button[@title="Save"])[1]',
+                save_Button_Second_Row: '(//img[@alt="Save"])[2]',
+                row_List_Rent_Invoice: "//app-group-invoice/div[2]/div/div",
             },
-
-        
         },
 
         add_Additional_Fees_Section: {
@@ -510,8 +521,10 @@ class properties_page {
         await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.quantity_New_Input, 8);
         await userActions.enterText(this.locators.add_Additional_Fees_Section.new_Item_Added_Additional_Fees.rate_New_Input, 30);
         await userActions.clickOn(this.locators.add_Additional_Fees_Section.recurring_Invoice_Toggle_Switch);
-        await userActions.waitFor(5000),
-        await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.line_Item_Rental_Invoice);  
+        (await userActions.waitFor(5000),
+            await userActions.clickOn(
+                this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.line_Item_Rental_Invoice
+            ));
         await userActions.clickOn(this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date);
         await userActions.selectOptionFromDropDownBasedOnIndex(
             this.locators.add_Additional_Fees_Section.make_This_A_Line_Item_On_The_Rental_Invoice.start_Date,
@@ -540,11 +553,54 @@ class properties_page {
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
     }
 
+    async addingM2MleaseTermDetails_Monthly_View_Edit_Rent_Scheduled() {
+        let addressinformation1 = {
+            fname: await randomUtils.randomAlphabets(5),
+            lastname: await randomUtils.randomAlphabets(7),
+            email: "test" + (await randomUtils.generateRandomNumber(4)) + "@yopmail.com",
+            phone: "99999" + (await randomUtils.generateRandomNumber(5)),
+        };
+        await assertUtils.verifyElementExistsonPage(this.locators.addPropertyDetails.add_Lease_Button_Verify);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
+        await userActions.clickOn(this.locators.lease_TermDetails.m2m_Lease_Type_RadioButton);
+        await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
+        await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "1500");
+        await userActions.clickOn(this.locators.lease_TermDetails.due_On_Date_Dropdown);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lease_TermDetails.due_On_Date_Dropdown, 1);
+        await userActions.clickOn(this.locators.lease_TermDetails.first_Invoice_Date_Input);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lease_TermDetails.first_Invoice_Date_Input, 1);
 
+        let count = await userActions.getElementText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.total_Number_Of_Invoice_Count);
+        await assertUtils.verifyElementToHaveText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.total_Number_Of_Invoice_Count, count);
+        console.log(count);
 
+        await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.view_Edit_Rent_Scheduled);
+        await assertUtils.verifyElementsArrayCount(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.row_List_Rent_Invoice, 12);
+        await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.action_Button_Three_Dot);
+        await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.edit_Button);
+        await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.calender_Input);
+        await calender.setNextMonthGivenDate(5);
+        await userActions.enterText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.rent_Input, 650);
+        await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.save_Button);
 
+        // await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.action_Button_Three_Dot_Second_Row);    //for second  not able to get it as loctaors are not getting worked 
+        // await userActions.enterText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.rent_Input_Second_Row, 850);
+        // await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.save_Button_Second_Row);
 
-
+        await userActions.clickOn(this.locators.add_TenantDetails.add_Tenant_Button);
+        await userActions.enterText(this.locators.add_TenantDetails.fname_Input, addressinformation1.fname);
+        await userActions.enterText(this.locators.add_TenantDetails.lname_Input, addressinformation1.lastname);
+        await userActions.enterText(this.locators.add_TenantDetails.email_Input, addressinformation1.email);
+        await userActions.enterText(this.locators.add_TenantDetails.phone_Input, addressinformation1.phone);
+        await userActions.clickOn(this.locators.add_TenantDetails.application_Screening_Dropdwon);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.add_TenantDetails.application_Screening_Dropdwon, 4);
+        await userActions.waitFor(5000);
+        await userActions.clickOn(this.locators.add_TenantDetails.next_Button_TenantDetails);
+        await userActions.clickOn(this.locators.renterInsurance_Details.next_Button_RenterInsuranceDetails);
+        await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
+        await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
+    }
 
 
 

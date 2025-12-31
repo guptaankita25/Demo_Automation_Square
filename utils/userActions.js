@@ -228,12 +228,12 @@ class userActions {
     }
 
     /**
-     *get text - Get visible text  [Used for: any element that contains visible text.
+     *get element text - Get visible text  [Used for: any element that contains visible text.
      * Used for: elements that contain visible text content between tags (not in attributes).
      * Returns: the text that’s displayed to the user.
      */
 
-    async getText(locator) {
+    async getElementText(locator) {
         const element = await $(locator);
         const text = await element.getText();
         console.log(`Text in element ${locator} is: ${text}`);
