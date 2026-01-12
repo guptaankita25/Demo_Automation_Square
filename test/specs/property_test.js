@@ -92,7 +92,7 @@ describe("TC to create a new property & create a lease", function () {
         await propertyMS_page.addingM2MLeaseTermDetails_Weekly_With_Additional_fess_Recurring_Fess_Make_This_line_Item_As_Rental_Invoice();
         console.log(createdPropertyName3);
 
-    });g
+    });
 
 
     xit("TC to create M2M and verify the number of invoice and able to check the edit and delete invoice", async () => {        

@@ -7,6 +7,7 @@ import testData from "../../mocks/testData";
 import { browser } from "@wdio/globals";
 import userData from "../../mocks/userData";
 import calender from "../../utils/calender.js";
+import { th } from "@faker-js/faker";
 //import { th } from "@faker-js/faker";
 //import { use } from "react";
 //import { number } from "yargs";
@@ -189,6 +190,85 @@ class properties_page {
             hasOpen_Maintenance_Checkbox: "#has-open-maintenance",
             viewArchived_Properties_Checkbox: "#view-archived-property",
         },
+
+        addNotesSection: {
+            add_Notes_Button: '//span[contains(text(),"Add Notes")]',
+            notes_And_Files_Heading: '//div[contains(text()," NOTES & FILES ")]',
+            cross_Icon: "#sidepanel-close-button",
+            Notes_Tab_Text: '//a[contains(text(),"NOTES")]',
+            Files_Tab_Text: '//a[contains(text(),"FILES")]',
+            post_Button: '//button[contains(text(),"Post")]',
+            notes_Text_Area_Input: '//textarea[@formcontrolname="addNote"]',
+            getNotesByText: (text) => {
+                return `//div[contains(text(),"${text}")]`;
+            },
+
+            getPoNameByText: (name) => `//span[normalize-space()="${name}"]`,
+            //date: '//div[@role="tabpanel"]//div[1]//div[1]//div[1]//div[1]//div[3]//span[2]',
+            date: '//div[@role="tabpanel"]//in-shared-section/div[2]/in-primary-notes//div[3]/span[2]',
+            poName_Notes: '//div[@role="tabpanel"]//in-shared-section/div[2]/in-primary-notes//div[3]/span[1]',
+            propertyName: '//div[@role="tabpanel"]//in-shared-section/div[2]/in-primary-notes//div[1]/div//div/div/div[1]',
+            actionMenuIconBasedOnNotesIndex: (notesindex) => {
+                return `//div[contains(text(),"${notesindex}")]/ancestor::div[contains(@class,"tw-flex-row")]//in-icon[@role="img"]`;
+            },
+            editIcon: '//li[contains(text(), "Edit")]',
+            deleteIcon: '//li[contains(text(), "Delete")]',
+            editNotesTextArea: '//textarea[@formcontrolname="edit"]',
+            saveBtn: "//in-note-edit/div/div[2]/button[1]/in-icon",
+            cancelBtn: "//in-note-edit/div/div[2]/button[2]/in-icon",
+            add_Attachment_Button: '//input[@type="file"]',
+        },
+
+        lateFees_Section: {
+            //add_lateFees_Button: '//span[contains(text(),"Add Late Fee")]',
+            add_lateFees_Button: '//button[contains(text(), " Add Late Fee ")]',
+            arrow_Icon: '//button[@data-locator="move-back-to-property-settings1"]//in-icon',
+            add_Late_Fees_Label: '//span[contains(text(), "Add Another Late Fee")]',
+            late_Fees_Type_Dropdown: '//select[@data-locator="late-fee-type-id"]',
+            fee_Amount_Input: '//input[@data-locator="late-fee-amount"]',
+            grace_Period_Input: '//input[@data-locator="grace-period"]',
+            repeat_Toggle_Switch: '//in-toggle-input[@data-locator="repeat"]/div',
+            repeat_Every_Input: '//input[@data-locator="repeat-after-days"]',
+            end_After_Input: '//input[@data-locator="end-after-days"]',
+            apply_To_Checkbox: '(//input[@name="applyTo"])[2]', //second checkbox you can use first or third just change the index
+            save_Button_LateFees: '//button[@data-locator="save-to-add-late-fee"]',
+            cancel_Button: '//button[@data-locator="cancel-to-add-late-fee"]',
+            edit_Icon_Click_On_Property_Details: "#open-edit-property-sidepanel",
+            property_Settiong_Icon_Click: '//span[contains(text(), " Property Settings ")]',
+        },
+
+        invoiceSectionOnPropertyDetailsPage: {
+            upcoming_Invoice_Section: {
+                table_List_Rows: "//tbody/tr",
+                view_All_Button: '//in-lease-invoices//div[2][contains(text(), " View All ")]',
+                first_Invoice_Id: '//table[@id="upcomingInvoicesTable"]//tbody//tr[1]/td[1]/span',
+                first_Due_Date: '//table[@id="upcomingInvoicesTable"]//tbody//tr[1]//td[2]',
+                first_Amount_Due: '//table[@id="upcomingInvoicesTable"]//tbody//tr[1]//td[3]',
+                goTo_Record: "#redirect-to-income-invoice-details",
+                cross_Icon: "#sidepanel-close-button",
+                edit_Button: "#open-edit-invoice-invoice-sidepanel",
+                rate_Input: '//input[@placeholder="Rate"]',
+                due_On_Input: '//input[@formcontrolname="DueDate"]',
+                save_Changes_Button: "#sidepanel-primary-button",
+                cancel_Button: "#sidepanel-secondary-button",
+                back_Arrow: "#sidepanel-back-button",
+                view_All_Invoices: {
+                    row_count_View_All: "//in-tailwind-frame-content//table//tbody/tr",
+                    top_list_invoiceId: "//in-tailwind-frame-content//tbody//tr[1]/td[1]",
+                    top_list_DueDate: "//in-tailwind-frame-content//tbody//tr[1]//td[2]",
+                    top_Second_list_InvoiceId: "//in-tailwind-frame-content//tbody//tr[2]//td[1]",
+                    top_Third_list_InvoiceId: "//in-tailwind-frame-content//tbody//tr[3]//td[1]",
+                    top_Fourth_list_InvoiceId: "//in-tailwind-frame-content//tbody//tr[4]//td[1]",
+                    top_Fifth_list_InvoiceId: "//in-tailwind-frame-content//tbody//tr[5]//td[1]",
+                    top_Second_list_DueDate: "//in-tailwind-frame-content//tbody//tr[2]//td[2]",
+                    top_list_AmountDue: "//in-tailwind-frame-content//tbody//tr[1]//td[3]",
+                    top_Second_list_AmountDue: "//in-tailwind-frame-content//tbody//tr[2]//td[3]",
+                },
+                popup_Message: {
+                    proceed_Yes: "#modal-primary-button",
+                },
+            },
+        },
     };
 
     //Creating Dynamic function
@@ -283,7 +363,7 @@ class properties_page {
         await userActions.clickOn(this.locators.lease_TermDetails.nextButton_AddLeaseTermDetails);
         await userActions.clickOn(this.locators.lease_TermDetails.m2m_Lease_Type_RadioButton);
         await userActions.clickOn(this.locators.lease_TermDetails.next_Button_LeaseTermDetails);
-        await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "2500");
+        await userActions.enterText(this.locators.lease_TermDetails.rent_Amount_Input, "200");
         await userActions.clickOn(this.locators.lease_TermDetails.due_On_Date_Dropdown);
         await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lease_TermDetails.due_On_Date_Dropdown, 1);
         await userActions.clickOn(this.locators.lease_TermDetails.first_Invoice_Date_Input);
@@ -584,7 +664,7 @@ class properties_page {
         await userActions.enterText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.rent_Input, 650);
         await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.save_Button);
 
-        // await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.action_Button_Three_Dot_Second_Row);    //for second  not able to get it as loctaors are not getting worked 
+        // await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.action_Button_Three_Dot_Second_Row);    //for second  not able to get it as loctaors are not getting worked
         // await userActions.enterText(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.rent_Input_Second_Row, 850);
         // await userActions.clickOn(this.locators.lease_TermDetails.view_And_Edit_Rent_Scheduled.save_Button_Second_Row);
 
@@ -601,8 +681,6 @@ class properties_page {
         await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
     }
-
-
 
     // Fixed Term Lease cases
     async addingFixedTermLeaseDetails_Monthly() {
@@ -640,6 +718,82 @@ class properties_page {
         await userActions.clickOn(this.locators.renterInsurance_Details.next_Button_RenterInsuranceDetails);
         await userActions.clickOn(this.locators.finalize_Lease.offline_Signature_Checkbox);
         await userActions.clickOn(this.locators.finalize_Lease.confirm_Invite_Button);
+    }
+
+    //Details Page on Property page
+
+    async addingRandomNotesOnDetailsPage() {
+        await userActions.clickOn(this.locators.addNotesSection.add_Notes_Button);
+        await assertUtils.verifyElementToBeDisabled(this.locators.addNotesSection.post_Button);
+        await assertUtils.verifyElementExistsonPage(this.locators.addNotesSection.notes_And_Files_Heading);
+        let notes = await randomUtils.randomAlphabets(5);
+        console.log(notes);
+        await userActions.enterText(this.locators.addNotesSection.notes_Text_Area_Input, notes);
+        await assertUtils.verifyElementToBeEnabled(this.locators.addNotesSection.post_Button);
+        await userActions.clickOn(this.locators.addNotesSection.post_Button);
+        return notes;
+    }
+
+    async addingLateFeesOnPropertyDetailsPageForM2MafterLeaseCreation() {
+        await userActions.clickOn(this.locators.lateFees_Section.edit_Icon_Click_On_Property_Details);
+        await userActions.clickOn(this.locators.lateFees_Section.property_Settiong_Icon_Click);
+        await userActions.clickOn(this.locators.lateFees_Section.add_lateFees_Button);
+        await userActions.clickOn(this.locators.lateFees_Section.late_Fees_Type_Dropdown);
+        await userActions.selectOptionFromDropDownBasedOnIndex(this.locators.lateFees_Section.late_Fees_Type_Dropdown, 2);
+        await userActions.clickOn(this.locators.lateFees_Section.fee_Amount_Input);
+        await userActions.enterText(this.locators.lateFees_Section.fee_Amount_Input, 100);
+        await userActions.clickOn(this.locators.lateFees_Section.grace_Period_Input);
+        await userActions.enterText(this.locators.lateFees_Section.grace_Period_Input, 3);
+        await userActions.clickOn(this.locators.lateFees_Section.repeat_Toggle_Switch);
+        await userActions.clickOn(this.locators.lateFees_Section.repeat_Every_Input);
+        await userActions.enterText(this.locators.lateFees_Section.repeat_Every_Input, 2);
+        await userActions.clickOn(this.locators.lateFees_Section.end_After_Input);
+        await userActions.enterText(this.locators.lateFees_Section.end_After_Input, 22);
+        await userActions.clickOn(this.locators.lateFees_Section.apply_To_Checkbox);
+        await userActions.clickOn(this.locators.lateFees_Section.save_Button_LateFees);
+    }
+
+    async validateupcomingInvoicesDetailsOnPropertyDetailsPage() {
+        await assertUtils.verifyElementsArrayCount(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.table_List_Rows, 3);
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.view_All_Button);
+        await assertUtils.verifyElementsArrayCount(
+            this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.view_All_Invoices.row_count_View_All,
+            12
+        );
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.cross_Icon);
+        let invoiceId = await userActions.getElementText(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.first_Invoice_Id);
+        let dueDate = await userActions.getElementText(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.first_Due_Date);
+        let amountDue = await userActions.getElementText(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.first_Amount_Due);
+        console.log("Invoice ID is: " + invoiceId);
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.first_Invoice_Id);
+        await assertUtils.verifyElementToHaveText(
+            this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.first_Invoice_Id,
+            invoiceId
+        );
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.edit_Button);
+        await userActions.clearTxtField(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.rate_Input);
+        //await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.rate_Input);
+        
+        // not able to correct this as i am not able to clear the filed i don
+
+        let updatedInvoiceAmount = "100";
+        await userActions.enterText(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.rate_Input, updatedInvoiceAmount);
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.due_On_Input);
+
+        await calender.setNextMonthGivenDate(15);
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.save_Changes_Button);
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.back_Arrow);
+
+        await userActions.clickOn(this.locators.invoiceSectionOnPropertyDetailsPage.upcoming_Invoice_Section.popup_Message.proceed_Yes);
+
+        //await assertUtils.verifyElementToHaveText()
+
+        /// need to chcek how do i equal to assert
     }
 }
 

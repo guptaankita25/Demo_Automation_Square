@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//in-lease-invoices//div[2][contains(text(), \" View All \")]"
+}

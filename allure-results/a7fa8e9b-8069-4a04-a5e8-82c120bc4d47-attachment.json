@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//div[contains(text(),\"ZTZUW\")]/ancestor::div[contains(@class,\"tw-flex-row\")]//in-icon[@role=\"img\"]"
+}

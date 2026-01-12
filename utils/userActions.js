@@ -1,5 +1,28 @@
 //const { expect, browser } = require("@wdio/globals");
 import { expect, browser, $ } from "@wdio/globals";
+import path from "path";
+import os from "os";
+import { el } from "@faker-js/faker";
+
+
+
+
+
+let waitTimeout = {
+    Wait: {
+        DisplayTimeout: 25000,
+        ClickableTimeout: 15000,
+        WaitAfterClick: 1000,
+        WaitAfterTextEnter: 200,
+        StaticWaitForPageLoad: 4000,
+        StaticTimeout: 2000,
+        HalfSecondTimeout: 500,
+        OneSecondTimeout: 1000,
+        TwoSecondTimeout: 2000,
+        ThreeSecondTimeout: 3000,
+        FourSecondTimeout: 4000,
+    },
+};
 
 class userActions {
     async clickOn(element, extraTime) {
@@ -8,10 +31,10 @@ class userActions {
         await this.waitFor(extraTime || 3000);
         console.log(`Clicked on element: ${element}`);
     }
-/** 
-    //enter text - Because enterText() expects text (a string), not a number.
-    //ZIP codes are often stored as numbers, so .toString() converts them 01235---12345 so that why we use to stringmethod
-*/
+    /** 
+        //enter text - Because enterText() expects text (a string), not a number.
+        //ZIP codes are often stored as numbers, so .toString() converts them 01235---12345 so that why we use to stringmethod
+    */
     async enterText(element, value, extraTime) {
         const webElement = await $(element);
         //await webElement.waitForDisplayed({ timeout: extraTime || 5000 });
@@ -49,6 +72,15 @@ class userActions {
         await browser.refresh();
         await browser.pause(2000); // Wait for 2 seconds after refreshing the page
         console.log("Page is refreshed");
+    }
+
+    /**
+     * clearTextFiled: it will clear the value
+     */
+
+    async clearTxtField(element) {
+        const webElement = await this.getLocator(element);
+        await webElement.clearValue();
     }
 
     /**broswer URL - Get the current URL of the browser
@@ -135,7 +167,7 @@ class userActions {
 
     /**
      * scroll to element - Scrolls the page to bring the specified element into view
-     * @param {string} locator - The locator of the element to scroll to    
+     * @param {string} locator - The locator of the element to scroll to
      * @returns {Promise<void>} a Promise that resolves when the page is scrolled to the element
      */
     async scrollToElement(locator) {
@@ -144,8 +176,6 @@ class userActions {
         await browser.pause(2000);
     }
 
-
-    
     /**
      * Element Interaction Commands
      */
@@ -342,6 +372,51 @@ class userActions {
         await this.waitFor(2000);
 
         console.log(`Selected option at index ${index} from the dropdown ${locator}`);
+    }
+
+    /**
+     * Returns the locator object for the given locator string
+     * @param {string} locator - Locator string
+     * @returns {Promise<Locator>} - Locator object
+     */
+    async getLocator(locator) {
+        const loc = await $(locator);
+        return loc;
+    }
+
+    /**
+     * upload file  - upload a file to an elements with a given locators
+     * @param {string} locator - The locator of the file input element to upload the file to
+     * @param {string} file - The path to the file to be uploaded
+     * @returns {Promise<void>} a Promise that resolves when the file is uploaded and loading overlay is gone
+     */
+    async uploadFile(locator, file) {
+        console.log(`Uploading file: ${file} to element: ${locator}`);
+        let osName = os.platform();
+
+        const filePath = path.resolve(file); // ensures you’re always passing an absolute path as this is the way of writing
+
+        if (osName.includes("win") || osName.includes("linux")) {
+            // windows or linux
+            await $(locator).setValue(filePath);
+        } else {
+            const remoteFilePath = await browser.uploadFile(filePath); /// macOS or remote execution
+            await $(locator).setValue(remoteFilePath);
+        }
+        await this.waitFor(waitTimeout.Wait.FourSecondTimeout);
+        console.log(`File uploaded successfully to element: ${locator}`);
+    }
+
+    /*changeelementstyleto block - file uploads and hidden elements.
+     *
+     */
+
+    async changeElementStyleToBlock(elem) {
+        let webElement = await this.getLocator(elem);
+        await browser.execute((el) => {
+            el.style.display = "block";
+        }, webElement);
+        console.log(`Changed element style to block for: ${elem}`);
     }
 }
 

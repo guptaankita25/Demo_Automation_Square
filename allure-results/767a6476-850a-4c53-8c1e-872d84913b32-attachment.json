@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//select[@data-locator=\"late-fee-type-id\"]"
+}

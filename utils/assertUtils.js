@@ -29,7 +29,7 @@ class asserUtils {
 
     async verifyElementToBeEnabled(element) {
         const webElement = await $(element);
-        await expect(webElement).tobeEnabled();
+        await expect(webElement).toBeEnabled();
         console.log(`Verified that element ${element} is enabled on the page.`);
     }
 

@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//input[@data-locator=\"end-after-days\"]"
+}

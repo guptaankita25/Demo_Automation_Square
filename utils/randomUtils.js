@@ -65,6 +65,25 @@ Math.random(); // → something like 0.3456 or 0.9123
     }
 
 
+    async randomAlphabetsWithNumberSpace(maxLength = 100) {                   // this i need to verify this is not working
+        const charc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789     ";
+        let randomString = '';
+        for (var i = 0; i < length; i++){
+            var rnum = Math.floor(Math.random() * charc.maxLength) + 1;
+            randomString += charc.charAt(rnum, rnum + 1);
+
+        }
+        return randomString;
+
+
+// randomString = randomString + characters.substring(rnum, rnum + 1);
+//         }   
+//         return randomString;
+
+
+    }
+
+
 
 
 

@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//in-note-edit/div/div[2]/button[1]/in-icon"
+}

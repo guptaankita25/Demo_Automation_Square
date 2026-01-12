@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//div[@role=\"tabpanel\"]//in-shared-section/div[2]/in-primary-notes//div[3]/span[2]"
+}

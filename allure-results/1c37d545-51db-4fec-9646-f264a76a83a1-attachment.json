@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"//div [contains(text(),\"undefined\")]\"}\n  (Session info: chrome=143.0.7499.170)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff701fc88e5\n\t0x7ff701fc8940\n\t0x7ff701da165d\n\t0x7ff701df9a33\n\t0x7ff701df9d3c\n\t0x7ff701e4df67\n\t0x7ff701e4ac97\n\t0x7ff701deac29\n\t0x7ff701deba93\n\t0x7ff7022e0640\n\t0x7ff7022daf80\n\t0x7ff7022f96e6\n\t0x7ff701fe5de4\n\t0x7ff701feed8c\n\t0x7ff701fd2004\n\t0x7ff701fd21b5\n\t0x7ff701fb7ee2\n\t0x7fff056be8d7\n\t0x7fff0658c53c\n"
+}

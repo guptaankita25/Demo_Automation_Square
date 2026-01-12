@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//in-tailwind-frame-content//tbody//tr[1]/td[1]"
+}

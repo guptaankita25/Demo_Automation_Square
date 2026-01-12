@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"//span[text() = \"Properties \"]\"}\n  (Session info: chrome=143.0.7499.170)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff6c56788e5\n\t0x7ff6c5678940\n\t0x7ff6c545165d\n\t0x7ff6c54a9a33\n\t0x7ff6c54a9d3c\n\t0x7ff6c54fdf67\n\t0x7ff6c54fac97\n\t0x7ff6c549ac29\n\t0x7ff6c549ba93\n\t0x7ff6c5990640\n\t0x7ff6c598af80\n\t0x7ff6c59a96e6\n\t0x7ff6c5695de4\n\t0x7ff6c569ed8c\n\t0x7ff6c5682004\n\t0x7ff6c56821b5\n\t0x7ff6c5667ee2\n\t0x7ffd9724e8d7\n\t0x7ffd97aec53c\n"
+}
