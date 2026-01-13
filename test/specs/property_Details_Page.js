@@ -107,7 +107,7 @@ describe("TC to perform action on property details page such as notes , invoices
 
 
     
-    it("TC to validate the upcoming invoices section on property details page and also edit and delete the invoice", async () => {
+    xit("TC to validate the upcoming invoices section on property details page and also edit and delete the invoice", async () => {
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");

@@ -9,6 +9,11 @@ class userData {
                 },
 
                 po2: {
+                    userName: "jessicaneilsen435@yopmail.com",
+                    password: "Pass@123",
+                },
+
+                po3: {
                     userName: "satyapal.kumar@taazaa.com",
                     password: "Pass@123",
                 },

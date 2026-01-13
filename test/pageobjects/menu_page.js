@@ -2,25 +2,20 @@
 import userActions from "../../utils/userActions";
 
 
-class menu_page { 
+class menu_page {
     locators = {
-        
         dashboard: '//span[text() = "Dashboard"]',
-        property : '//span[text() = "Properties "]',
-
+        property: '//span[text() = "Properties "]',
+        maintenance: '//span[text() = "Maintenance "]',
 
         waitTill: 3000,
-		waitFor2Seconds: 2000,
-		waitFor1Seconds: 1000,
-		waitFor5Seconds: 5000,
-		waitFor10Seconds: 10000,
+        waitFor2Seconds: 2000,
+        waitFor1Seconds: 1000,
+        waitFor5Seconds: 5000,
+        waitFor10Seconds: 10000,
     };
 
-
-
-
     async navigateToDashboard() {
-
         await userActions.waitFor(this.locators.waitFor2Seconds);
         await userActions.clickOn(this.locators.property);
         await userActions.waitFor(this.locators.waitFor2Seconds);
@@ -31,35 +26,15 @@ class menu_page {
         //await userActions.waitFor(this.locators.waitFor2Seconds);
     }
 
-
-    
     async navigateToProperties() {
         await userActions.waitFor(this.locators.waitFor5Seconds);
         await userActions.clickOn(this.locators.property);
         //await userActions.navigateToUrlAndTitle();
-
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    async navigateToMaintenance() {
+        await userActions.waitFor(this.locators.waitFor2Seconds);
+    }
 }
 export default new menu_page();
 
