@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//ng-dropdown-panel/div//div[1][@role=\"option\"]"
+}

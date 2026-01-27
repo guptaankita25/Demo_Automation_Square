@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//in-maintenance-filter//in-icon[@role=\"img\"][2]"
+}

@@ -9,7 +9,15 @@ class testData {
             tags_List: ['Commercial','HOA','Industrial','Others','Office'],
         
         },
+
+
+        maintenance: {
+            category_List: ["Electrical", "Plumbing", "A/C", "Appliance", "Heat", "Other"],
+            
+
+        },
     };
+
 }
 
 

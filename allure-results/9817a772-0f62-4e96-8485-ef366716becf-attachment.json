@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//ng-select[@data-locator=\"multi-select-v3-custom-ng-select\"]"
+}

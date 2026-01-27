@@ -34,6 +34,7 @@ class menu_page {
 
     async navigateToMaintenance() {
         await userActions.waitFor(this.locators.waitFor2Seconds);
+        await userActions.clickOn(this.locators.maintenance);
     }
 }
 export default new menu_page();

@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//ng-select[@formcontrolname=\"property\"]//ng-dropdown-panel//div[2][@role=\"option\"]"
+}

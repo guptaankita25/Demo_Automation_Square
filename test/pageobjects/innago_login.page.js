@@ -6,6 +6,8 @@ import userActions from "../../utils/userActions";
 class innagoLoginPage {
     locators = {
         userName: '//input[@id = "username"]',
+        //userName: '#username-label',
+
         password: "#password",
         signIn_Button: "",
         continue_Button: '//button[@data-action-button-primary="true"]',

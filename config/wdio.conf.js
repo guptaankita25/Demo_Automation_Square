@@ -23,7 +23,8 @@ export const config = {
     specs: [
         //'../test/specs/login_test.js',
         //"../test/specs/property_test.js",
-        "../test/specs/property_Details_Page.js",
+        //"../test/specs/property_Details_Page.js",
+        "../test/specs/maintenance_PO.js",
     ],
     // Patterns to exclude.
     exclude: [

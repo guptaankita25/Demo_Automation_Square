@@ -70,7 +70,20 @@ class Calendar {
 
     
 
-    async setLastDateOfFutureSixMonth() {}
+    async setLastDateOfFutureSixMonth() {
+
+    }
+
+    async setDateforGivenMonthAny() { 
+
+
+    }
+
+
+
+
 }
+
+
 
 export default new Calendar();

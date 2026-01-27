@@ -123,7 +123,7 @@ describe("TC to perform action on property details page such as notes , invoices
         };
         await propertyMS_page.applyFilterOnProperties([propertyDetails.propertyName]);
         await propertyMS_page.selectGivenPropertyFromList([propertyDetails.propertyName]);
-        // let createdPropertyName = await propertyMS_page.createNewProperty();
+        //let createdPropertyName = await propertyMS_page.createNewProperty();
 
         // await propertyMS_page.addingM2MLeaseTermDetails_Monthly();
         // console.log(createdPropertyName);

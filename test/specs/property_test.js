@@ -28,7 +28,7 @@ describe("TC to create a new property & create a lease", function () {
         await innagoLoginPage.logout();
     });
 
-    xit("TC to Create a Property and lease M2M", async () => {                                                  ///this is working
+    it("TC to Create a Property and lease M2M", async () => {                                                  ///this is working
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");

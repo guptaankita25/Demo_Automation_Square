@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//ng-select[@formcontrolname=\"units\"]/div//span[@class=\"ng-arrow-wrapper\"]"
+}

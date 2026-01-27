@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"(//img[@alt=\"logout\"])[1]\"}\n  (Session info: chrome=144.0.7559.97)",
+  "stacktrace": "Symbols not available. Dumping unresolved backtrace:\n\t0x7ff7f01b5805\n\t0x7ff7f01b5860\n\t0x7ff7eff6108d\n\t0x7ff7effbc3be\n\t0x7ff7effbc6cc\n\t0x7ff7f000d2f7\n\t0x7ff7f0009e45\n\t0x7ff7effacc28\n\t0x7ff7effadb33\n\t0x7ff7f049eae0\n\t0x7ff7f0498edd\n\t0x7ff7f04b978a\n\t0x7ff7f01d12d5\n\t0x7ff7f01d9abc\n\t0x7ff7f01bece4\n\t0x7ff7f01bee96\n\t0x7ff7f01a4f77\n\t0x7ffd9724e8d7\n\t0x7ffd97aec53c\n"
+}
