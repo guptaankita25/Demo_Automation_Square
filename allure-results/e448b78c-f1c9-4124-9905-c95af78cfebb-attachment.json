@@ -1,0 +1,4 @@
+{
+  "using": "css selector",
+  "value": "[data-locator=\"multi-select-v3-search-input\"]"
+}

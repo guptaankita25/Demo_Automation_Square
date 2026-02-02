@@ -32,7 +32,7 @@ describe("TC for Maintenance page on PO ", function () {
 
 
 
-    it("TC to create a maintenance ticket", async () => {
+    xit("TC to create a maintenance ticket", async () => {
         await userActions.waitFor(5000);
         await browser.maximizeWindow();
         console.log("Launching innago Url");

@@ -147,6 +147,7 @@ class maintenance_Page {
             categoryName: category,
             propertyName: null,
             propertyUnit: null,
+            //status: null,
         };
 
         await userActions.clickOn(this.locators.createMaintenance.new_Maintenance_Button);
@@ -274,37 +275,66 @@ class maintenance_Page {
                 await userActions.clickOn(this.locators.Filter_Maintenance.property_Dropdown_Option_Maintenance); // to open dropdown again for next property
 
                 await userActions.waitFor(2000);
-            }
-        }
-
-        if (maintenancestatus !== undefined && maintenancestatus !== null) {
-            await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
-            for (let i = 0; i < maintenancestatus.length; i++) {
-                await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(maintenancestatus[i]));
-            }
-            else {
-
+                await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
+                await userActions.waitFor(5000);
 
             }
         }
 
+        //     if (maintenancestatus !== undefined && maintenancestatus !== null) {
+        //         await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
+        //         for (let i = 0; i < maintenancestatus.length; i++) {
+        //             await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(maintenancestatus[i]));
+        //         }
+        //         await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
+        //     else {
+        //             await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
+        //             await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(maintenancestatus));
+        //             await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
 
-        await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
-        await userActions.waitFor(5000);
+        //         }
+        
+        //     }
+
+
+        //     await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
+        //     await userActions.waitFor(5000);
+        // }
+
+        // if (maintenancestatus !== undefined && maintenancestatus !== null) {
+        //     await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
+        //     await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(maintenancestatus));
+        //     await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
+        // }
+
+        // await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
+        // await userActions.waitFor(5000);
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
 }
+
+
+
+
+
 
 export default new maintenance_Page();
 
 
-
-
-
-
-                await userActions.clickOn(this.locators.filter_section.statusFilterDrop);
-            } else {
-                await userActions.logDataToReports(`Selecting status --> ${filterObject.status}`);
-                await userActions.clickOn(this.locators.filter_section.statusFilterDrop);
-                await userActions.clickOn(this.locators.filter_section.statusByText(filterObject.status));
-                await userActions.clickOn(this.locators.filter_section.statusFilterDrop);
-            }
