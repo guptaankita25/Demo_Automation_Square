@@ -66,19 +66,31 @@ class asserUtils {
      * Element Content Assertions
      */
 
-    async verifyElementToHaveText(element, expectedText) {        /// exact match
+    async verifyElementToHaveText(element, expectedText) {
+        /// exact match
         const webElement = await $(element);
         await expect(webElement).toHaveText(expectedText);
         console.log(`Verified that element ${element} has text: ${expectedText}.`);
     }
 
-   //partial  match >>>> conatins text 
+    //partial  match >>>> conatins text
 
-    async verifyElementsArrayCount(locator, countToCheck) {                                                         // this gives yu the count
+    async verifyElementsArrayCount(locator, countToCheck) {
+        // this gives yu the count
         await console.log(`>>> Asserting selector list count :: ${locator} Equals ${countToCheck}`);
 
         const listItems = await $$(locator);
         await expect(listItems).toBeElementsArrayOfSize(countToCheck);
+    }
+
+    async assertForEquality(textOne, textTwo) {
+        await console.log(`>>> Asserting for equality :: ${textOne} == ${textTwo}`);
+        await expect(textOne).toEqual(textTwo);
+    }
+
+    async assertForInEquality(textOne, textTwo) {
+        await console.log(`>>> Asserting for inequality :: ${textOne} != ${textTwo}`);
+        await expect(textOne).not.toEqual(textTwo);
     }
 }
 export default new asserUtils();

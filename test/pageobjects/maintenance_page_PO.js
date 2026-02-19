@@ -3,7 +3,7 @@ import userActions from "../../utils/userActions";
 import randomUtils from "../../utils/randomUtils";
 import testData from "../../mocks/testData";
 import calender from "../../utils/calender";
-import { th } from "@faker-js/faker";
+
 
 
 
@@ -18,6 +18,7 @@ class maintenance_Page {
             ticket_Title_FieldError: '//span[contains(text(),"Required Field")]',
             //#ticket-title-input+span
             property_Heading: "#property-text",
+            maintenanceTotalCount: 'span[id="records-showing"]',
             property_Dropdown_Arrow: '//ng-select[@formcontrolname="property"]/div//span[@class="ng-arrow-wrapper"]',
             first_Property_Check: '//ng-select[@formcontrolname="property"]//ng-dropdown-panel//div[1][@role="option"]',
             second_Property_Check: '//ng-select[@formcontrolname="property"]//ng-dropdown-panel//div[2][@role="option"]',
@@ -45,6 +46,9 @@ class maintenance_Page {
             attachFile_Button: "#browse",
             cancel_Button: "#cancel-button",
             create_Button: "#create-button",
+            getPropertyByName: (propertyName) => {
+                return `//h4[contains(text(), '${propertyName}')]`;
+            },
 
             add_New_Category_Button: {
                 add_New_Category_Button_Locator: '//h5[contains(text(), "Add New Category")]',
@@ -133,6 +137,13 @@ class maintenance_Page {
             statusByText: (status) => {
                 return `//span[text()="${status}"]/parent::div`;
             },
+            statusFilterDrop: 'ng-select[formcontrolname="statusIds"]',
+        },
+
+        quickFilter: {
+            open_QuickFilter_Click: "#selection-card-Open",
+            resolved_QuickFilter_Click: "#selection-card-Resolved",
+            scheduled_QuickFilter_Click: "#selection-card-Scheduled",
         },
     };
 
@@ -258,7 +269,7 @@ class maintenance_Page {
         await userActions.clickOn(this.locators.createMaintenance.setReminder_Recurrence_Button.recurring_Card.save_Button);
     }
 
-    async filterMaintenanceTickets(properties, maintenancestatus) {
+    async filterMaintenanceTickets(properties, maintenancestatus) {               // this does not work correctly
         // status , catgrory
         await userActions.clickOn(this.locators.Filter_Maintenance.cross_Icon);
         await userActions.clickOn(this.locators.Filter_Maintenance.filter_Maintenance_Click);
@@ -277,7 +288,6 @@ class maintenance_Page {
                 await userActions.waitFor(2000);
                 await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
                 await userActions.waitFor(5000);
-
             }
         }
 
@@ -293,9 +303,8 @@ class maintenance_Page {
         //             await userActions.clickOn(this.locators.Filter_Maintenance.status_Dropdwon_Option_Click);
 
         //         }
-        
-        //     }
 
+        //     }
 
         //     await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
         //     await userActions.waitFor(5000);
@@ -309,25 +318,53 @@ class maintenance_Page {
 
         // await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
         // await userActions.waitFor(5000);
-
-
-
-
-
-
-
-
-
-
-
     }
 
+    async applyMaintenanceFilter(filterObject) {
+        //await userActions.clickOn(this.locators.Filter_Maintenance.cross_Icon);
+        await userActions.clickOn(this.locators.Filter_Maintenance.filter_Maintenance_Click);
 
+        if (filterObject.propertyNameList !== undefined && filterObject.propertyNameList !== null) {
+            await userActions.clickOn(this.locators.Filter_Maintenance.property_Dropdown_Option_Maintenance);
+            for (let i = 0; i < filterObject.propertyNameList.length; i++) {
+                await userActions.enterText(this.locators.Filter_Maintenance.property_Serach_Field_Input, filterObject.propertyNameList[i]);
+                await userActions.clickOn(this.locators.createMaintenance.getPropertyByName(filterObject.propertyNameList[i]));
+            }
+        }
 
+        if (filterObject.status !== undefined && filterObject.status !== null) {
+            if (typeof filterObject.status !== "string") {
+                //typeof - data type of a value.
+                await userActions.clickOn(this.locators.Filter_Maintenance.statusFilterDrop);
+                for (let i = 0; i < filterObject.status.length; i++) {
+                    await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(filterObject.status[i]));
+                }
+                await userActions.clickOn(this.locators.Filter_Maintenance.statusFilterDrop);
+            } else {
+                //await userActions.logDataToReports(`Selecting status --> ${filterObject.status}`);
+                await userActions.clickOn(this.locators.Filter_Maintenance.statusFilterDrop);
+                await userActions.clickOn(this.locators.Filter_Maintenance.statusByText(filterObject.status));
+                await userActions.clickOn(this.locators.Filter_Maintenance.statusFilterDrop);
+            }
+        }
+        await userActions.clickOn(this.locators.Filter_Maintenance.apply_Filter_Button);
+        await userActions.waitFor(5000);
+    }
 
-
-
-
+    async getMaintenanceTotalCount() {
+        let lastNumber;
+        //await userActions.logDataToReports("Getting maintenance ticket count");
+        await userActions.waitUntillElementIsDispayed(this.locators.createMaintenance.new_Maintenance_Button);
+        if (await userActions.doesElementExists(this.locators.createMaintenance.maintenanceTotalCount)) {
+            // to check if total count element is present or not as if there is no maintenance ticket then this element will not be present
+            let countString = await userActions.getElementText(this.locators.createMaintenance.maintenanceTotalCount); // getting text like "Showing 1-10 of 15" or total = 15 or maintenance(8) and from this i need to extract only number 15 which is total count of maintenance tickets
+            const match = countString.match(/\d+$/); //this is regrx -- \d+ → one or more digits & $ → at the end of the string
+            lastNumber = match ? match[0] : null; // if there is a match then get the first match otherwise return null  and THIS is called ternary operator
+        } else {
+            lastNumber = "0"; // If the total count element is missing: assume 0 maintenance tickets
+        }
+        return lastNumber; // Returns: "12" → if count exists & "0" → if element doesn’t exist & null → if text exists but no number found
+    }
 }
 
 

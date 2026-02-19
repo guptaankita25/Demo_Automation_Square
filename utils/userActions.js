@@ -385,6 +385,22 @@ class userActions {
     }
 
     /**
+     * Checks if an element exists on the page.
+     * @param {string} element The element to check for.
+     * @return {Promise<boolean>} A Promise that resolves with true if the element exists, false otherwise.
+     */
+    async doesElementExists(locator) {
+        const element = await this.getLocator(locator);
+        let isExisting = await element.isExisting();
+        await console.log(`Element "${locator}" is ${isExisting ? "existing" : "not existing"}`);
+        return isExisting;
+    }
+
+
+
+
+
+    /**
      * upload file  - upload a file to an elements with a given locators
      * @param {string} locator - The locator of the file input element to upload the file to
      * @param {string} file - The path to the file to be uploaded

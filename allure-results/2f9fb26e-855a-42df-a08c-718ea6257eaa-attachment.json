@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//in-selection-card[@id=\"quick-filter-Resolved\"]//p[text()=\"Resolved\"]"
+}
